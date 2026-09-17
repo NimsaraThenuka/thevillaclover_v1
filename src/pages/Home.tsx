@@ -311,7 +311,7 @@ export default function Home({ onNavigate }: HomeProps) {
                 The Villa Clover in Galle offers a sun terrace and a lush garden. Guests can relax in the outdoor spaces and enjoy free WiFi throughout the property.
               </p>
               <p className="text-gray-600 leading-relaxed mb-8" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.95rem' }}>
-                The villa features two bedrooms and a living room. Each room is equipped with air-conditioning, a balcony, and a kitchenette — perfect for families, couples, or small groups seeking a quiet retreat.
+                The villa features two bedrooms and a living room. Each room is equipped with air-conditioning, a balcony, and a kitchenette  perfect for families, couples, or small groups seeking a quiet retreat.
               </p>
               <div className="grid grid-cols-2 gap-6 mb-10">
                 {[
@@ -470,12 +470,12 @@ export default function Home({ onNavigate }: HomeProps) {
               {
                 icon: HomeIcon,
                 title: 'Entire Villa is Yours',
-                desc: 'Enjoy full privacy in your 2-bedroom sanctuary with rooftop sun terrace, lush tropical garden, and private balcony — exclusively yours.',
+                desc: 'Enjoy full privacy in your 2-bedroom sanctuary with rooftop sun terrace, lush tropical garden, and private balcony  exclusively yours.',
               },
               {
                 icon: HeartHandshake,
                 title: 'Personalised Hospitality',
-                desc: 'From warm check-ins with hot tea to local transport tips and insider Galle recommendations — Ganidu and the team ensure a seamless stay.',
+                desc: 'From warm check-ins with hot tea to local transport tips and insider Galle recommendations  Ganidu and the team ensure a seamless stay.',
               },
             ].map((item, i) => {
               const IconComponent = item.icon;
@@ -635,7 +635,7 @@ export default function Home({ onNavigate }: HomeProps) {
             </h2>
             <div className="gold-divider mx-auto mt-6 mb-4" />
             <p className="text-gray-600 max-w-xl mx-auto text-sm leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
-              From UNESCO World Heritage colonial ramparts to golden surf beaches and tropical lake safaris — the best of southern Sri Lanka is minutes away.
+              From UNESCO World Heritage colonial ramparts to golden surf beaches and tropical lake safaris  the best of southern Sri Lanka is minutes away.
             </p>
           </div>
 
@@ -791,7 +791,7 @@ export default function Home({ onNavigate }: HomeProps) {
           <VillaVideoPlayer
             badge="Video Tour"
             title="Villa Video Tour"
-            subtitle="Take a short walkthrough of The Villa Clover — our garden, terrace, and living spaces."
+            subtitle="Take a short walkthrough of The Villa Clover  our garden, terrace, and living spaces."
             darkTheme={false}
           />
         </div>
@@ -900,7 +900,7 @@ export default function Home({ onNavigate }: HomeProps) {
           </h2>
           <div className="gold-divider mx-auto mb-8" />
           <p className="text-gray-500 mb-10 leading-relaxed" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.95rem' }}>
-            Perfect for a 1-night stay or an extended getaway. No prepayment needed — pay at the property. Pets welcome at no extra charge.
+            Perfect for a 1-night stay or an extended getaway. No prepayment needed , pay at the property. Pets welcome at no extra charge.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button onClick={() => handleNav('contact')} className="btn-primary">

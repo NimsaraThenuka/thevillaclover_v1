@@ -129,7 +129,7 @@ export default function About({ onNavigate }: AboutProps) {
                 The Villa Clover is a private, fully air-conditioned 2-bedroom villa designed for travelers seeking a blend of modern comfort, space, and authentic Sri Lankan warmth. Set in a peaceful residential neighborhood, our property offers a quiet retreat with lush garden views, a private balcony, and an exclusive rooftop terrace perfect for morning coffee or evening sunsets.
               </p>
               <p className="text-gray-600 leading-relaxed mb-5" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.95rem' }}>
-                We take pride in delivering personalised hospitality. From smooth check-ins and welcoming hot tea to assisting with local transport, tuk-tuks, and insider tips for Galle Fort and nearby beaches — we are dedicated to making your stay seamless and unforgettable.
+                We take pride in delivering personalised hospitality. From smooth check-ins and welcoming hot tea to assisting with local transport, tuk-tuks, and insider tips for Galle Fort and nearby beaches. we are dedicated to making your stay seamless and unforgettable.
               </p>
               <p className="text-gray-600 leading-relaxed mb-8" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.95rem' }}>
                 Guests love our peaceful residential setting, which offers a quiet retreat away from city noise while keeping you just 10 minutes from historic Galle Fort. Day trips to Hikkaduwa for coral reefs, Koggala Lake for boat safaris, and Mirissa for whale watching are also easily arranged.

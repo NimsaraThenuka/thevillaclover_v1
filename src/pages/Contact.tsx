@@ -51,11 +51,11 @@ export default function Contact() {
     },
     {
       q: 'What payment methods are accepted?',
-      a: 'The Villa Clover accepts cash payments only. No prepayment is needed — you pay at the property.',
+      a: 'The Villa Clover accepts cash payments only. No prepayment is needed, you pay at the property.',
     },
     {
       q: 'How far is the villa from the airport?',
-      a: 'Koggala Airport is 13 km from the villa. We offer airport shuttle service — please contact us to arrange in advance.',
+      a: 'Koggala Airport is 13 km from the villa. We offer airport shuttle service, please contact us to arrange in advance.',
     },
     {
       q: 'How far is Galle Fort?',
@@ -368,15 +368,15 @@ export default function Contact() {
                 const Wrapper = info.link ? 'a' : 'div';
                 const extraProps = info.link
                   ? {
-                      href: info.link,
-                      target: '_blank',
-                      rel: 'noopener noreferrer',
-                      className:
-                        'flex items-start gap-3 sm:gap-4 p-3.5 sm:p-5 hover:border-[#c9a96e] hover:bg-amber-50/30 transition-all duration-300 group cursor-pointer block',
-                    }
+                    href: info.link,
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                    className:
+                      'flex items-start gap-3 sm:gap-4 p-3.5 sm:p-5 hover:border-[#c9a96e] hover:bg-amber-50/30 transition-all duration-300 group cursor-pointer block',
+                  }
                   : {
-                      className: 'flex items-start gap-3 sm:gap-4 p-3.5 sm:p-5',
-                    };
+                    className: 'flex items-start gap-3 sm:gap-4 p-3.5 sm:p-5',
+                  };
                 return (
                   <Wrapper
                     key={info.label}

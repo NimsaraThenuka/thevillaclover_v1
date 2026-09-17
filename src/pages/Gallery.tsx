@@ -51,9 +51,8 @@ function GalleryImageCard({
           (e.currentTarget as HTMLImageElement).src = photo.url;
         }}
         onLoad={() => setLoaded(true)}
-        className={`w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105 ${
-          loaded ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.03]'
-        }`}
+        className={`w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105 ${loaded ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.03]'
+          }`}
       />
 
       {/* Video Indicator Badge for Video Items */}
@@ -112,8 +111,8 @@ export default function Gallery({ onNavigate }: GalleryProps) {
     active === 'All'
       ? GALLERY_PHOTOS
       : active === 'Videos' || active === 'Video'
-      ? GALLERY_PHOTOS.filter((p) => p.category === 'Video' || p.isVideo)
-      : GALLERY_PHOTOS.filter((p) => p.category === active);
+        ? GALLERY_PHOTOS.filter((p) => p.category === 'Video' || p.isVideo)
+        : GALLERY_PHOTOS.filter((p) => p.category === active);
 
   const getCategoryCount = (cat: string) => {
     if (cat === 'All') return GALLERY_PHOTOS.length;
@@ -234,7 +233,7 @@ export default function Gallery({ onNavigate }: GalleryProps) {
             className="text-white/70 max-w-xl mx-auto leading-relaxed"
             style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.95rem' }}
           >
-            Explore every corner of The Villa Clover — from sun-drenched rooftop terraces to tranquil garden retreats and modern air-conditioned suites.
+            Explore every corner of The Villa Clover  from sun-drenched rooftop terraces to tranquil garden retreats and modern air-conditioned suites.
           </p>
         </div>
         <div
@@ -447,9 +446,8 @@ export default function Gallery({ onNavigate }: GalleryProps) {
                     src={currentPhoto.url}
                     alt={currentPhoto.alt}
                     onLoad={() => setIsImgLoading(false)}
-                    className={`max-w-full max-h-[64vh] sm:max-h-[72vh] object-contain rounded-xs shadow-2xl transition-opacity duration-300 select-none ${
-                      isImgLoading ? 'opacity-40 scale-[0.99]' : 'opacity-100 scale-100'
-                    }`}
+                    className={`max-w-full max-h-[64vh] sm:max-h-[72vh] object-contain rounded-xs shadow-2xl transition-opacity duration-300 select-none ${isImgLoading ? 'opacity-40 scale-[0.99]' : 'opacity-100 scale-100'
+                      }`}
                     style={{ display: 'block' }}
                   />
                   <p className="mt-3 text-white/90 text-xs md:text-sm text-center font-light tracking-wide px-4">
@@ -484,9 +482,8 @@ export default function Gallery({ onNavigate }: GalleryProps) {
                   <button
                     key={p.url + realIndex}
                     onClick={() => handleOpenLightbox(realIndex)}
-                    className={`shrink-0 w-12 h-9 rounded overflow-hidden cursor-pointer transition-all duration-200 border-2 relative ${
-                      isCur ? 'border-amber-400 scale-110 opacity-100 shadow-lg' : 'border-transparent opacity-40 hover:opacity-80'
-                    }`}
+                    className={`shrink-0 w-12 h-9 rounded overflow-hidden cursor-pointer transition-all duration-200 border-2 relative ${isCur ? 'border-amber-400 scale-110 opacity-100 shadow-lg' : 'border-transparent opacity-40 hover:opacity-80'
+                      }`}
                   >
                     <img src={p.url} alt="" className="w-full h-full object-cover" />
                     {p.isVideo && (
