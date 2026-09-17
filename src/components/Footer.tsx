@@ -17,8 +17,10 @@ export default function Footer({ onNavigate }: FooterProps) {
           {/* Brand */}
           <div>
             <img
-              src="https://res.cloudinary.com/dyp247eoh/image/upload/v1789630381/villa_logo-removebg-preview_hvsuk2.png"
+              src="/images/logo.webp"
               alt="The Villa Clover"
+              loading="lazy"
+              decoding="async"
               className="h-20 md:h-24 w-auto object-contain mb-5 drop-shadow-md"
             />
             <p className="text-white/60 text-sm leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>

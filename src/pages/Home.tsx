@@ -113,32 +113,33 @@ export default function Home({ onNavigate }: HomeProps) {
     <div className="page-enter">
       {/* ── HERO ── */}
       <section
-        className="relative min-h-screen flex flex-col items-center justify-between pt-28 pb-8 px-6 overflow-hidden"
+        className="relative min-h-screen flex flex-col items-center justify-between pt-22 sm:pt-28 pb-5 sm:pb-8 px-4 sm:px-6 overflow-hidden"
         style={{
           background: '#0d1b2a',
+          clipPath: 'inset(0)',
         }}
       >
-        {/* Background image with parallax - slightly darkened for optimal text legibility */}
+        {/* Background image - Fixed Parallax Window (Image stays fixed while content scrolls over it smoothly) */}
         <div
-          className="absolute inset-0"
+          className="fixed inset-0 pointer-events-none"
           style={{
             backgroundImage: `url('${VILLA_IMAGES.hero}')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center 40%',
-            backgroundAttachment: 'fixed',
             filter: 'brightness(0.65)',
+            willChange: 'transform',
           }}
         />
-        {/* Gradient overlays */}
+        {/* Gradient overlays - Fixed to remain synchronized with background */}
         <div
-          className="absolute inset-0"
+          className="fixed inset-0 pointer-events-none"
           style={{
             background:
               'linear-gradient(to bottom, rgba(13,27,42,0.65) 0%, rgba(13,27,42,0.42) 40%, rgba(13,27,42,0.8) 100%)',
           }}
         />
         <div
-          className="absolute inset-0"
+          className="fixed inset-0 pointer-events-none"
           style={{
             background:
               'radial-gradient(ellipse at center, transparent 30%, rgba(13,27,42,0.45) 100%)',
@@ -146,7 +147,7 @@ export default function Home({ onNavigate }: HomeProps) {
         />
 
         {/* Hero content */}
-        <div className="relative z-10 text-center w-full max-w-4xl mx-auto my-auto pt-2 sm:pt-4 md:pt-6 px-3 flex flex-col items-center">
+        <div className="relative z-10 text-center w-full max-w-4xl mx-auto my-auto pt-1 sm:pt-4 md:pt-6 px-3 flex flex-col items-center">
           <p
             className="section-label mb-2 sm:mb-3 md:mb-4 text-[11px] sm:text-xs md:text-sm tracking-[0.25em] md:tracking-[0.3em]"
             style={{ color: '#c9a96e' }}
@@ -155,10 +156,10 @@ export default function Home({ onNavigate }: HomeProps) {
           </p>
 
           <h1
-            className="hero-title mb-3 sm:mb-4 md:mb-5 max-w-full px-2"
+            className="hero-title mb-2.5 sm:mb-4 md:mb-5 max-w-full px-2"
             style={{
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: 'clamp(2.5rem, 6.5vw, 6.2rem)',
+              fontSize: 'clamp(2.35rem, 6.5vw, 6.2rem)',
               fontWeight: 300,
               lineHeight: 1.1,
               letterSpacing: '-0.01em',
@@ -167,7 +168,7 @@ export default function Home({ onNavigate }: HomeProps) {
             The <br className="sm:hidden" />Villa Clover
           </h1>
 
-          <div className="gold-divider mx-auto mb-3 sm:mb-4 md:mb-6" style={{ width: '45px' }} />
+          <div className="gold-divider mx-auto mb-2.5 sm:mb-4 md:mb-6" style={{ width: '45px' }} />
 
           <p
             className="text-amber-200/95 mb-2 sm:mb-2.5 md:mb-3 text-xs sm:text-sm md:text-base font-light tracking-[0.12em] uppercase max-w-full px-2"
@@ -179,7 +180,7 @@ export default function Home({ onNavigate }: HomeProps) {
           </p>
 
           <p
-            className="text-white/80 mb-5 sm:mb-6 md:mb-8 max-w-lg mx-auto text-xs sm:text-sm md:text-[15px] leading-relaxed px-3 font-light"
+            className="text-white/80 mb-4 sm:mb-6 md:mb-8 max-w-sm sm:max-w-lg mx-auto text-xs sm:text-sm md:text-[15px] leading-relaxed px-2 font-light"
             style={{ fontFamily: 'Inter, sans-serif' }}
           >
             A private 2-bedroom luxury villa offering modern comfort, lush gardens, and authentic Sri Lankan hospitality in peaceful Galle.
@@ -203,7 +204,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
           {/* Rating badge - Compact & Centered */}
           <div
-            className="mt-4 sm:mt-8 inline-flex items-center gap-3 sm:gap-4 px-4 py-2 sm:px-7 sm:py-3 rounded-sm max-w-[280px] sm:max-w-none"
+            className="mt-3.5 sm:mt-8 inline-flex items-center gap-3 sm:gap-4 px-3.5 py-1.5 sm:px-7 sm:py-3 rounded-sm max-w-[280px] sm:max-w-none"
             style={{
               background: 'rgba(255,255,255,0.08)',
               backdropFilter: 'blur(10px)',
@@ -211,10 +212,10 @@ export default function Home({ onNavigate }: HomeProps) {
             }}
           >
             <div className="text-center">
-              <p className="font-semibold text-xl sm:text-2xl md:text-[2rem] text-[#c9a96e] leading-none" style={{ fontFamily: "Inter, sans-serif" }}>10.0</p>
+              <p className="font-semibold text-lg sm:text-2xl md:text-[2rem] text-[#c9a96e] leading-none" style={{ fontFamily: "Inter, sans-serif" }}>10.0</p>
               <p className="text-white/60 text-[9px] sm:text-xs tracking-widest uppercase mt-0.5" style={{ fontFamily: 'Inter, sans-serif' }}>Exceptional</p>
             </div>
-            <div className="h-7 sm:h-9 md:h-10" style={{ width: '1px', background: 'rgba(201,169,110,0.3)' }} />
+            <div className="h-6 sm:h-9 md:h-10" style={{ width: '1px', background: 'rgba(201,169,110,0.3)' }} />
             <div className="text-left">
               <p className="text-white text-xs sm:text-sm font-medium leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>Top-rated villa</p>
               <p className="text-white/50 text-[10px] sm:text-xs mt-0.5" style={{ fontFamily: 'Inter, sans-serif' }}>Verified guest reviews</p>
@@ -230,19 +231,19 @@ export default function Home({ onNavigate }: HomeProps) {
               el.scrollIntoView({ behavior: 'smooth' });
             }
           }}
-          className="relative z-20 mt-3 sm:mt-6 mb-1 sm:mb-2 flex flex-col items-center gap-1.5 group cursor-pointer text-amber-300/80 hover:text-amber-300 transition-all duration-300 select-none"
+          className="relative z-20 mt-2 sm:mt-6 mb-12 sm:mb-2 flex flex-col items-center gap-1 sm:gap-1.5 group cursor-pointer text-amber-300/80 hover:text-amber-300 transition-all duration-300 select-none"
           aria-label="Scroll down to explore"
         >
           {/* Mobile View Scroll Indicator (< md) */}
-          <div className="flex md:hidden flex-col items-center gap-1.5">
+          <div className="flex md:hidden flex-col items-center gap-1">
             <span
-              className="text-[10px] font-medium tracking-[0.22em] uppercase text-white/75 group-hover:text-amber-300 transition-colors"
+              className="text-[9.5px] font-medium tracking-[0.2em] uppercase text-white/75 group-hover:text-amber-300 transition-colors"
               style={{ fontFamily: 'Inter, sans-serif' }}
             >
               Scroll to Explore
             </span>
-            <div className="w-7 h-7 rounded-full border border-amber-300/50 bg-amber-300/10 backdrop-blur-xs flex items-center justify-center shadow-[0_0_15px_rgba(201,169,110,0.25)] group-hover:border-amber-300 group-hover:bg-amber-300/20 transition-all">
-              <ChevronDown className="w-4 h-4 text-amber-300 animate-bounce" />
+            <div className="w-6 h-6 rounded-full border border-amber-300/50 bg-amber-300/10 backdrop-blur-xs flex items-center justify-center shadow-[0_0_15px_rgba(201,169,110,0.25)] group-hover:border-amber-300 group-hover:bg-amber-300/20 transition-all">
+              <ChevronDown className="w-3.5 h-3.5 text-amber-300 animate-bounce" />
             </div>
           </div>
 
@@ -338,6 +339,7 @@ export default function Home({ onNavigate }: HomeProps) {
                   src={VILLA_IMAGES.introExterior}
                   alt="The Villa Clover garden and veranda"
                   loading="lazy"
+                  decoding="async"
                   className="w-full h-64 sm:h-80 md:h-[420px] lg:h-[500px] object-cover"
                 />
               </div>
@@ -425,6 +427,7 @@ export default function Home({ onNavigate }: HomeProps) {
                   src={img.url}
                   alt={img.alt}
                   loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                 />
               </div>
@@ -845,26 +848,25 @@ export default function Home({ onNavigate }: HomeProps) {
                 >
                   <button
                     onClick={() => setOpenFaq(isOpen ? null : idx)}
-                    className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 cursor-pointer"
+                    className="w-full text-left px-4 py-3.5 sm:px-6 sm:py-5 flex items-center justify-between gap-3 sm:gap-4 cursor-pointer"
                   >
                     <span
+                      className="text-[0.95rem] sm:text-[1.1rem] md:text-[1.25rem] font-semibold leading-snug"
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: '1.25rem',
-                        fontWeight: 600,
                         color: isOpen ? '#c9a96e' : '#0d1b2a',
                       }}
                     >
                       {faq.q}
                     </span>
                     <ChevronDown
-                      className={`w-5 h-5 transition-transform duration-300 shrink-0 ${isOpen ? 'rotate-180 text-amber-500' : 'text-gray-400'
+                      className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 shrink-0 ${isOpen ? 'rotate-180 text-amber-500' : 'text-gray-400'
                         }`}
                     />
                   </button>
                   {isOpen && (
                     <div
-                      className="px-6 pb-6 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4"
+                      className="px-4 pb-4 sm:px-6 sm:pb-6 text-gray-600 text-xs sm:text-sm leading-relaxed border-t border-gray-100 pt-3 sm:pt-4"
                       style={{ fontFamily: 'Inter, sans-serif' }}
                     >
                       {faq.a}

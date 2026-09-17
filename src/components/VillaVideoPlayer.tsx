@@ -57,9 +57,9 @@ export default function VillaVideoPlayer({
       </div>
 
       {/* Video Container Frame - Native HTML5 Player */}
-      <div className="reveal-scale max-w-[320px] sm:max-w-[350px] md:max-w-[370px] mx-auto">
+      <div className="reveal-scale max-w-[320px] sm:max-w-[350px] md:max-w-4xl mx-auto">
         <div
-          className="relative w-full aspect-[9/16] rounded-xl overflow-hidden shadow-2xl border-2 bg-black"
+          className="relative w-full aspect-[9/16] md:aspect-video rounded-xl md:rounded-2xl overflow-hidden shadow-2xl border-2 bg-black"
           style={{ borderColor: 'rgba(201, 169, 110, 0.35)' }}
         >
           {!isPlaying ? (
@@ -79,10 +79,10 @@ export default function VillaVideoPlayer({
                 style={{ background: 'rgba(13, 27, 42, 0.35)' }}
               >
                 <button
-                  className="w-16 h-16 sm:w-18 sm:h-18 rounded-full flex items-center justify-center text-[#0d1b2a] bg-[#c9a96e] hover:bg-amber-300 transition-all duration-300 shadow-2xl group-hover:scale-110 cursor-pointer"
+                  className="w-16 h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full flex items-center justify-center text-[#0d1b2a] bg-[#c9a96e] hover:bg-amber-300 transition-all duration-300 shadow-2xl group-hover:scale-110 cursor-pointer"
                   aria-label="Play video"
                 >
-                  <Play className="w-7 h-7 fill-current ml-0.5 text-[#0d1b2a]" />
+                  <Play className="w-7 h-7 md:w-8 md:h-8 fill-current ml-0.5 text-[#0d1b2a]" />
                 </button>
               </div>
             </div>
@@ -95,7 +95,7 @@ export default function VillaVideoPlayer({
               onContextMenu={(e) => e.preventDefault()}
               autoPlay
               playsInline
-              className="w-full h-full object-cover bg-black select-none"
+              className="w-full h-full object-contain bg-black select-none"
               preload="auto"
             />
           )}

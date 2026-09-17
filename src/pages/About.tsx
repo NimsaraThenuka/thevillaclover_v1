@@ -71,16 +71,16 @@ export default function About({ onNavigate }: AboutProps) {
       {/* ── PAGE HEADER ── */}
       <header
         className="relative pt-36 pb-28 px-6 text-center overflow-hidden"
-        style={{ background: '#0d1b2a' }}
+        style={{ background: '#0d1b2a', clipPath: 'inset(0)' }}
       >
         <div
-          className="absolute inset-0"
+          className="fixed inset-0 pointer-events-none"
           style={{
             backgroundImage: `url('${VILLA_IMAGES.aboutHeader}')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center 40%',
-            backgroundAttachment: 'fixed',
             opacity: 0.35,
+            willChange: 'transform',
           }}
         />
         <div className="relative z-10 max-w-3xl mx-auto">
@@ -136,8 +136,10 @@ export default function About({ onNavigate }: AboutProps) {
               </p>
               <div className="flex items-center gap-4">
                 <img
-                  src="https://res.cloudinary.com/dyp247eoh/image/upload/v1789630760/692877037_az9w5s.jpg"
+                  src="/images/host.webp"
                   alt="Ganidu Sasmitha - Host & Owner"
+                  loading="lazy"
+                  decoding="async"
                   className="w-14 h-14 rounded-full object-cover shadow-md shrink-0"
                   style={{ border: '2px solid #c9a96e' }}
                 />
@@ -154,6 +156,7 @@ export default function About({ onNavigate }: AboutProps) {
                   src={VILLA_IMAGES.rooftopDay}
                   alt="Rooftop terrace and lounge"
                   loading="lazy"
+                  decoding="async"
                   className="w-full object-cover h-60"
                 />
               </div>
@@ -162,6 +165,7 @@ export default function About({ onNavigate }: AboutProps) {
                   src={VILLA_IMAGES.bedroom1Close}
                   alt="Comfortable bedroom suite"
                   loading="lazy"
+                  decoding="async"
                   className="w-full object-cover h-60"
                 />
               </div>
@@ -350,6 +354,8 @@ export default function About({ onNavigate }: AboutProps) {
                 <img
                   src={VILLA_IMAGES.locationCard}
                   alt="The Villa Clover garden swing by the lake"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full object-cover h-80"
                 />
               </div>

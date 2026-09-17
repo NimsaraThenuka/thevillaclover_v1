@@ -18,6 +18,7 @@ function GalleryImageCard({
   onOpen: () => void;
 }) {
   const [loaded, setLoaded] = useState(false);
+  const thumbSrc = photo.url.replace('/images/villa/', '/images/villa/thumbs/');
 
   return (
     <div
@@ -39,13 +40,18 @@ function GalleryImageCard({
         </div>
       )}
 
-      {/* Actual Image / Poster */}
+      {/* Actual Image / Poster - Ultra lightweight WebP thumbnail */}
       <img
-        src={photo.url}
+        src={thumbSrc}
         alt={photo.alt}
         loading="lazy"
+        decoding="async"
+        onError={(e) => {
+          // Fallback to main URL if thumb not found
+          (e.currentTarget as HTMLImageElement).src = photo.url;
+        }}
         onLoad={() => setLoaded(true)}
-        className={`w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 ${
+        className={`w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105 ${
           loaded ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.03]'
         }`}
       />
@@ -90,10 +96,17 @@ export default function Gallery({ onNavigate }: GalleryProps) {
   const [active, setActive] = useState('All');
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const [isImgLoading, setIsImgLoading] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(24);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleCategoryChange = (cat: string) => {
+    setActive(cat);
+    setCurrentIndex(null);
+    setVisibleCount(24);
+  };
 
   const filtered: GalleryPhoto[] =
     active === 'All'
@@ -187,16 +200,16 @@ export default function Gallery({ onNavigate }: GalleryProps) {
       {/* ── PAGE HEADER ── */}
       <header
         className="relative pt-36 pb-28 px-6 text-center overflow-hidden"
-        style={{ background: '#0d1b2a' }}
+        style={{ background: '#0d1b2a', clipPath: 'inset(0)' }}
       >
         <div
-          className="absolute inset-0"
+          className="fixed inset-0 pointer-events-none"
           style={{
             backgroundImage: `url('${VILLA_IMAGES.galleryHeader}')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center 40%',
-            backgroundAttachment: 'fixed',
             opacity: 0.35,
+            willChange: 'transform',
           }}
         />
         <div className="relative z-10 max-w-3xl mx-auto">
@@ -242,10 +255,7 @@ export default function Gallery({ onNavigate }: GalleryProps) {
             return (
               <button
                 key={cat}
-                onClick={() => {
-                  setActive(cat);
-                  setCurrentIndex(null);
-                }}
+                onClick={() => handleCategoryChange(cat)}
                 className="px-3 py-1.5 sm:px-5 sm:py-2 text-[11px] sm:text-xs font-medium tracking-wider uppercase transition-all duration-300 flex items-center gap-1.5 sm:gap-2 cursor-pointer shrink-0"
                 style={{
                   fontFamily: 'Inter, sans-serif',
@@ -276,7 +286,7 @@ export default function Gallery({ onNavigate }: GalleryProps) {
       <section className="py-12 px-4 sm:px-6 lg:px-12" style={{ background: '#f8f5f0' }}>
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-            {filtered.map((photo, index) => (
+            {filtered.slice(0, visibleCount).map((photo, index) => (
               <GalleryImageCard
                 key={photo.url + index}
                 photo={photo}
@@ -284,6 +294,17 @@ export default function Gallery({ onNavigate }: GalleryProps) {
               />
             ))}
           </div>
+
+          {visibleCount < filtered.length && (
+            <div className="text-center mt-12">
+              <button
+                onClick={() => setVisibleCount((prev) => prev + 24)}
+                className="btn-primary cursor-pointer shadow-md hover:shadow-xl transition-all"
+              >
+                Load More Photos ({filtered.length - visibleCount} Remaining)
+              </button>
+            </div>
+          )}
 
           {filtered.length === 0 && (
             <div className="text-center py-20 text-gray-400" style={{ fontFamily: 'Inter, sans-serif' }}>

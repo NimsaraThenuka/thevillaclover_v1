@@ -56,8 +56,10 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
               className="flex items-center gap-3 group cursor-pointer select-none"
             >
               <img
-                src="https://res.cloudinary.com/dyp247eoh/image/upload/v1789630381/villa_logo-removebg-preview_hvsuk2.png"
+                src="/images/logo.webp"
                 alt="The Villa Clover"
+                decoding="async"
+                fetchPriority="high"
                 className="h-14 sm:h-16 md:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105 drop-shadow-md"
               />
             </button>

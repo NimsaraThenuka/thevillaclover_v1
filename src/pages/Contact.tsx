@@ -70,16 +70,16 @@ export default function Contact() {
       {/* ── PAGE HEADER ── */}
       <header
         className="relative pt-36 pb-28 px-6 text-center overflow-hidden"
-        style={{ background: '#0d1b2a' }}
+        style={{ background: '#0d1b2a', clipPath: 'inset(0)' }}
       >
         <div
-          className="absolute inset-0"
+          className="fixed inset-0 pointer-events-none"
           style={{
             backgroundImage: `url('${VILLA_IMAGES.contactHeader}')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundAttachment: 'fixed',
             opacity: 0.25,
+            willChange: 'transform',
           }}
         />
         <div className="relative z-10 max-w-3xl mx-auto">
@@ -284,6 +284,7 @@ export default function Contact() {
                   src={VILLA_IMAGES.contactVillaCard}
                   alt="The Villa Clover at night"
                   loading="lazy"
+                  decoding="async"
                   className="w-full object-cover h-48 sm:h-52"
                 />
               </div>
@@ -433,21 +434,20 @@ export default function Contact() {
                 }}
               >
                 <button
-                  className="w-full flex items-center justify-between p-6 text-left cursor-pointer"
+                  className="w-full flex items-center justify-between p-4 sm:p-6 text-left cursor-pointer"
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 >
                   <span
+                    className="text-[0.95rem] sm:text-[1.05rem] md:text-[1.15rem] font-medium"
                     style={{
                       fontFamily: "'Cormorant Garamond', serif",
-                      fontSize: '1.15rem',
                       color: '#0d1b2a',
-                      fontWeight: 500,
                     }}
                   >
                     {faq.q}
                   </span>
                   <ChevronDown
-                    className="w-5 h-5 text-[#1e3a5f] shrink-0 ml-4 transition-transform duration-300"
+                    className="w-4 h-4 sm:w-5 sm:h-5 text-[#1e3a5f] shrink-0 ml-3 sm:ml-4 transition-transform duration-300"
                     style={{
                       transform: openFaq === i ? 'rotate(180deg)' : 'none',
                     }}
@@ -455,13 +455,13 @@ export default function Contact() {
                 </button>
                 <div
                   style={{
-                    maxHeight: openFaq === i ? '200px' : '0',
+                    maxHeight: openFaq === i ? '300px' : '0',
                     overflow: 'hidden',
                     transition: 'max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                   }}
                 >
                   <p
-                    className="px-6 pb-6 text-gray-600 text-sm leading-relaxed"
+                    className="px-4 pb-4 sm:px-6 sm:pb-6 text-gray-600 text-xs sm:text-sm leading-relaxed"
                     style={{ fontFamily: 'Inter, sans-serif' }}
                   >
                     {faq.a}
