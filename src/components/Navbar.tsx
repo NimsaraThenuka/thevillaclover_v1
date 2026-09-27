@@ -85,7 +85,7 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
             {/* Desktop Book Now CTA */}
             <div className="hidden md:block">
               <button
-                onClick={() => handleNav('contact')}
+                onClick={() => handleNav('booking')}
                 className="btn-gold text-xs"
               >
                 Book Your Stay
@@ -164,7 +164,7 @@ export default function Navbar({ currentPage, onNavigate }: NavbarProps) {
 
           {/* Book Now Button */}
           <button
-            onClick={() => handleNav('contact')}
+            onClick={() => handleNav('booking')}
             className="btn-gold text-xs py-3 px-8 uppercase tracking-widest cursor-pointer"
           >
             Book Your Stay

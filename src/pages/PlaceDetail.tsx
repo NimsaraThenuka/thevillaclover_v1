@@ -37,7 +37,7 @@ export default function PlaceDetail({ placeId, onNavigate }: PlaceDetailProps) {
 
   const handleBookNow = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-    onNavigate('contact');
+    onNavigate('booking');
   };
 
   const whatsappMessage = encodeURIComponent(

@@ -33,7 +33,7 @@ const facilityGroups = [
   },
   {
     label: 'Bedroom & Bath',
-    items: ['Queen beds (both rooms)', 'Bedroom 1 Air Conditioning', 'Safety lockers', 'Free toiletries', 'Hairdryer', 'Shower'],
+    items: ['Queen beds (both rooms)', '1 AC Room & 1 Non-AC Room', 'Safety lockers', 'Free toiletries', 'Hairdryer', 'Shower'],
   },
   {
     label: 'Tech & Comfort',
@@ -475,7 +475,7 @@ export default function About({ onNavigate }: AboutProps) {
             Ready to Experience The Villa Clover?
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior }); onNavigate('contact'); }} className="btn-gold">
+            <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior }); onNavigate('booking'); }} className="btn-gold">
               Book Now
             </button>
             <button onClick={() => { window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior }); onNavigate('gallery'); }} className="btn-outline">

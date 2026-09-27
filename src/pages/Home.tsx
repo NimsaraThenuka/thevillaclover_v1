@@ -67,7 +67,7 @@ const amenities = [
   { icon: Wifi, label: 'Free WiFi' },
   { icon: Plane, label: 'Airport Hire' },
   { icon: Users, label: 'Family Rooms' },
-  { icon: Wind, label: 'Bedroom 1 AC' },
+  { icon: Wind, label: '1 AC & 1 Non-AC Room' },
   { icon: Trees, label: 'Garden & Rooftop' },
   { icon: ShieldCheck, label: 'Safety Lockers' },
   { icon: Sunrise, label: 'Lush Garden View' },
@@ -241,7 +241,7 @@ export default function Home({ onNavigate, scrollToSection }: HomeProps) {
           {/* Action Buttons - Perfectly balanced & never cropped on mobile */}
           <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-4 justify-center items-center w-full max-w-[240px] sm:max-w-none mx-auto">
             <button
-              onClick={() => handleNav('contact')}
+              onClick={() => handleNav('booking')}
               className="btn-gold w-full sm:w-auto text-xs py-2.5 px-6 sm:py-3.5 sm:px-9"
             >
               Book Your Stay
@@ -1036,8 +1036,8 @@ export default function Home({ onNavigate, scrollToSection }: HomeProps) {
             Perfect for a 1-night stay or an extended getaway. No prepayment needed , pay via cash or bank transfer. Pets are not allowed.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onClick={() => handleNav('contact')} className="btn-primary">
-              Contact Us to Book
+            <button onClick={() => handleNav('booking')} className="btn-primary">
+              Book Your Stay Now
             </button>
             <button onClick={() => handleNav('about')} className="btn-outline" style={{ borderColor: '#1e3a5f', color: '#1e3a5f' }}>
               Learn More

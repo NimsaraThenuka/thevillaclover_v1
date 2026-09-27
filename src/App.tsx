@@ -7,8 +7,9 @@ import About from './pages/About';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
 import PlaceDetail from './pages/PlaceDetail';
+import Booking from './pages/Booking';
 
-export type Page = 'home' | 'about' | 'gallery' | 'contact' | 'place-detail';
+export type Page = 'home' | 'about' | 'gallery' | 'contact' | 'place-detail' | 'booking';
 
 export default function App() {
   const [page, setPage] = useState<Page>('home');
@@ -46,6 +47,8 @@ export default function App() {
         return <Gallery onNavigate={navigate} />;
       case 'contact':
         return <Contact />;
+      case 'booking':
+        return <Booking onNavigate={navigate} />;
       case 'place-detail':
         return <PlaceDetail placeId={selectedPlaceId} onNavigate={navigate} />;
       default:
