@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useSEO } from '../hooks/useSEO';
 import { NEARBY_PLACES, NearbyPlace } from '../data/nearbyPlaces';
 import { VILLA_IMAGES } from '../data/villaImages';
 import WhatsAppIcon from '../components/WhatsAppIcon';
@@ -24,13 +25,21 @@ interface PlaceDetailProps {
 export default function PlaceDetail({ placeId, onNavigate }: PlaceDetailProps) {
   useScrollReveal();
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-  }, [placeId]);
-
   // Find the selected place, fallback to Galle Fort if not found
   const place: NearbyPlace =
     NEARBY_PLACES.find((p) => p.id === placeId) || NEARBY_PLACES[0];
+
+  useSEO({
+    title: `${place.title} Galle Travel Guide & Nearby Stay | The Villa Clover`,
+    description: `${place.desc} Located just ${place.distance} (${place.driveTime}) from The Villa Clover private 2-bedroom villa sanctuary in Galle.`,
+    keywords: `${place.title}, ${place.title} galle, things to do in galle, places to visit near the villa clover, ${place.tag}, galle sri lanka travel guide, villa near ${place.title}`,
+    canonicalUrl: `https://thevillaclover.com/?page=place-detail&id=${place.id}`,
+    ogImage: place.image,
+  });
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+  }, [placeId]);
 
   // Other recommendations (excluding current place)
   const otherPlaces = NEARBY_PLACES.filter((p) => p.id !== place.id);

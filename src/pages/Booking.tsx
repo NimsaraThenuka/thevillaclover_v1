@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useSEO } from '../hooks/useSEO';
 import { VILLA_IMAGES } from '../data/villaImages';
 import WhatsAppIcon from '../components/WhatsAppIcon';
 import {
@@ -32,6 +33,14 @@ interface BookingProps {
 
 export default function Booking({ onNavigate }: BookingProps) {
   useScrollReveal();
+  useSEO({
+    title: 'Direct Easy Booking | The Villa Clover Galle Sri Lanka — Zero Prepayment',
+    description:
+      'Reserve your stay at The Villa Clover in Galle, Sri Lanka with instant WhatsApp or Email confirmation. Zero advance deposit, pay upon arrival, entire private 2-bedroom villa.',
+    keywords:
+      'the villa clover booking, book villa sri lanka, direct villa booking galle, reserve villa clover, pay on arrival villa galle, whatsapp villa booking sri lanka, srilankan villa reservation',
+    canonicalUrl: 'https://thevillaclover.com/?page=booking',
+  });
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });

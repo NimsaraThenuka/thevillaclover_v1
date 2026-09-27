@@ -1,0 +1,8 @@
+# Robots.txt for The Villa Clover
+# https://thevillaclover.com
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://thevillaclover.com/sitemap.xml

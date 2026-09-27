@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useSEO } from '../hooks/useSEO';
 import { VILLA_IMAGES } from '../data/villaImages';
 import {
   Waves,
@@ -63,6 +64,14 @@ const nearby = [
 
 export default function About({ onNavigate }: AboutProps) {
   useScrollReveal();
+  useSEO({
+    title: 'About The Villa Clover | Exclusive Boutique Private Villa Sanctuary in Galle',
+    description:
+      'Discover The Villa Clover in Galle, Sri Lanka. A serene 2-bedroom private estate featuring 1 AC room, 1 non-AC room, scenic rooftop lounge, and lush tropical gardens.',
+    keywords:
+      'about the villa clover, boutique villa galle, luxury stay galle sri lanka, private villa sanctuary, holiday home galle, srilankan villa experience, galle private estate',
+    canonicalUrl: 'https://thevillaclover.com/?page=about',
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);

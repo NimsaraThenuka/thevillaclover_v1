@@ -1,0 +1,21 @@
+{
+  "name": "The Villa Clover — Luxury Private Villa in Galle, Sri Lanka",
+  "short_name": "The Villa Clover",
+  "description": "Private 2-bedroom luxury villa in Galle, Sri Lanka with rooftop lounge, garden swing, and direct booking guarantee.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d1b2a",
+  "theme_color": "#0d1b2a",
+  "icons": [
+    {
+      "src": "/images/logo.webp",
+      "sizes": "192x192",
+      "type": "image/webp"
+    },
+    {
+      "src": "/images/logo.webp",
+      "sizes": "512x512",
+      "type": "image/webp"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useSEO } from '../hooks/useSEO';
 import { X, ChevronLeft, ChevronRight, Sparkles, ZoomIn, Play } from 'lucide-react';
 import { VILLA_IMAGES, GALLERY_PHOTOS, GalleryPhoto } from '../data/villaImages';
 
@@ -92,6 +93,14 @@ function GalleryImageCard({
 
 export default function Gallery({ onNavigate }: GalleryProps) {
   useScrollReveal();
+  useSEO({
+    title: 'Photo Gallery | The Villa Clover — Luxury Bedrooms, Garden & Rooftop Lounge',
+    description:
+      'Explore high-definition photos of The Villa Clover in Galle, Sri Lanka. View our elegant bedrooms, modern kitchen, rooftop sunset terrace, and garden swing.',
+    keywords:
+      'the villa clover photos, villa gallery galle, sri lanka villa pictures, luxury villa gallery, rooftop lounge galle, garden villa photos sri lanka, vacation home interior',
+    canonicalUrl: 'https://thevillaclover.com/?page=gallery',
+  });
   const [active, setActive] = useState('All');
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const [isImgLoading, setIsImgLoading] = useState(false);

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useSEO } from '../hooks/useSEO';
 import { VILLA_IMAGES } from '../data/villaImages';
 import {
   CheckCircle2,
@@ -15,6 +16,14 @@ import WhatsAppIcon from '../components/WhatsAppIcon';
 
 export default function Contact() {
   useScrollReveal();
+  useSEO({
+    title: 'Contact & Location | The Villa Clover Galle, Sri Lanka — Direct Host Inquiries',
+    description:
+      'Get in touch with The Villa Clover in Galle, Sri Lanka. Located 2.8 km from Galle Fort. Call or WhatsApp +94 77 438 4915 or email info@thevillaclover.com.',
+    keywords:
+      'the villa clover contact, the villa clover location, the villa clover phone number, galle villa address, villa clover email, how to reach the villa clover, directions to villa clover',
+    canonicalUrl: 'https://thevillaclover.com/?page=contact',
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);

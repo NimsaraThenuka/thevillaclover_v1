@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Home Page - Highest Priority -->
+  <url>
+    <loc>https://thevillaclover.com/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://thevillaclover.com/images/villa/dsc08315-hdr.webp</image:loc>
+      <image:title>The Villa Clover Luxury 2-Bedroom Private Villa in Galle Sri Lanka</image:title>
+      <image:caption>Lush private villa garden, rooftop lounge and luxury accommodation in Galle</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Direct Booking Page -->
+  <url>
+    <loc>https://thevillaclover.com/?page=booking</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- About The Villa Clover -->
+  <url>
+    <loc>https://thevillaclover.com/?page=about</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Photo Gallery -->
+  <url>
+    <loc>https://thevillaclover.com/?page=gallery</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact & Location -->
+  <url>
+    <loc>https://thevillaclover.com/?page=contact</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Nearby Galle Attractions & Travel Guides -->
+  <url>
+    <loc>https://thevillaclover.com/?page=place-detail&amp;id=galle-fort</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thevillaclover.com/?page=place-detail&amp;id=jungle-beach</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thevillaclover.com/?page=place-detail&amp;id=old-dutch-hospital</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thevillaclover.com/?page=place-detail&amp;id=meeran-mosque</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thevillaclover.com/?page=place-detail&amp;id=japanese-peace-pagoda</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thevillaclover.com/?page=place-detail&amp;id=unawatuna-beach</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thevillaclover.com/?page=place-detail&amp;id=koggala-lake</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://thevillaclover.com/?page=place-detail&amp;id=yatagala-temple</loc>
+    <lastmod>2026-09-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+</urlset>

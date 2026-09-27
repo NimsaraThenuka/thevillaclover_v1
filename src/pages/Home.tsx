@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useSEO } from '../hooks/useSEO';
 import { VILLA_IMAGES } from '../data/villaImages';
 import { NEARBY_PLACES } from '../data/nearbyPlaces';
 import {
@@ -75,6 +76,14 @@ const amenities = [
 
 export default function Home({ onNavigate, scrollToSection }: HomeProps) {
   useScrollReveal();
+  useSEO({
+    title: 'The Villa Clover | Luxury 2-Bedroom Private Villa in Galle, Sri Lanka',
+    description:
+      'Book The Villa Clover in Galle, Sri Lanka. A luxury private 2-bedroom boutique villa with scenic rooftop lounge, tropical garden swing, modern kitchen, and 10 mins to Galle Fort. Direct booking with zero prepayment.',
+    keywords:
+      'the villa clover, villa clover, villa clover galle, the villa clover sri lanka, villa, villa srilanka, villa sri lanka, srilankan villa, luxury villa in galle, private villa galle, galle fort villa, unawatuna villa, best villa in sri lanka, boutique villa sri lanka, 2 bedroom villa galle, vacation rental galle sri lanka, holiday home galle',
+    canonicalUrl: 'https://thevillaclover.com/',
+  });
   const [currentReview, setCurrentReview] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 

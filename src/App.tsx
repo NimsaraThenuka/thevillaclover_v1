@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import FloatingActions from './components/FloatingActions';
@@ -16,11 +16,51 @@ export default function App() {
   const [selectedPlaceId, setSelectedPlaceId] = useState<string | null>(null);
   const [targetSection, setTargetSection] = useState<string | null>(null);
 
+  useEffect(() => {
+    // Read initial URL params for deep-link SEO indexing
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const urlPage = params.get('page') as Page | null;
+      const urlId = params.get('id');
+
+      if (urlPage && ['home', 'about', 'gallery', 'contact', 'place-detail', 'booking'].includes(urlPage)) {
+        setPage(urlPage);
+        if (urlPage === 'place-detail' && urlId) {
+          setSelectedPlaceId(urlId);
+        }
+      }
+    } catch {
+      // Fallback to home
+    }
+
+    const handlePopState = () => {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlPage = (urlParams.get('page') as Page) || 'home';
+        const urlId = urlParams.get('id');
+        setPage(urlPage);
+        if (urlPage === 'place-detail' && urlId) {
+          setSelectedPlaceId(urlId);
+        }
+      } catch {
+        setPage('home');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
   const navigate = (p: string, extra?: string) => {
+    let url = p === 'home' ? '/' : `/?page=${p}`;
     if (p === 'place-detail' && extra) {
+      url = `/?page=place-detail&id=${extra}`;
       setSelectedPlaceId(extra);
       setTargetSection(null);
       setPage('place-detail');
+      try {
+        window.history.pushState({}, '', url);
+      } catch {}
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
     } else if (p === 'home') {
       if (extra) {
@@ -29,12 +69,18 @@ export default function App() {
         setTargetSection(null);
       }
       setPage('home');
+      try {
+        window.history.pushState({}, '', extra ? `/#${extra}` : '/');
+      } catch {}
       if (!extra) {
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
       }
     } else {
       setTargetSection(null);
       setPage(p as Page);
+      try {
+        window.history.pushState({}, '', url);
+      } catch {}
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
     }
   };
