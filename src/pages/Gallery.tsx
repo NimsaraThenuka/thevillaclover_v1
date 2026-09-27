@@ -8,7 +8,7 @@ interface GalleryProps {
   onNavigate: (page: string) => void;
 }
 
-const categories = ['All', 'Videos', 'Exterior', 'Interior', 'Garden', 'Terrace'];
+const categories = ['All', 'Videos', 'Exterior', 'Interior', 'Garden', 'Rooftop'];
 
 function GalleryImageCard({
   photo,
@@ -233,7 +233,7 @@ export default function Gallery({ onNavigate }: GalleryProps) {
             className="text-white/70 max-w-xl mx-auto leading-relaxed"
             style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.95rem' }}
           >
-            Explore every corner of The Villa Clover  from sun-drenched rooftop terraces to tranquil garden retreats and modern air-conditioned suites.
+            Explore every corner of The Villa Clover  from the scenic rooftop to tranquil garden retreats and modern comfortable suites.
           </p>
         </div>
         <div

@@ -24,7 +24,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               className="h-20 md:h-24 w-auto object-contain mb-5 drop-shadow-md"
             />
             <p className="text-white/60 text-sm leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
-              A private, fully air-conditioned 2-bedroom villa in Galle, Sri Lanka. Modern comfort meets authentic Sri Lankan warmth.
+              A private 2-bedroom villa in Galle, Sri Lanka. Modern comfort meets authentic Sri Lankan warmth.
             </p>
             <div className="flex items-center gap-2 mt-5">
               <Star className="w-4 h-4 text-amber-300 fill-amber-300" />
@@ -81,7 +81,7 @@ export default function Footer({ onNavigate }: FooterProps) {
               </div>
               <div className="flex items-center gap-3">
                 <Sparkles className="w-4 h-4 text-amber-300/80 shrink-0" />
-                <span>Pets welcome · Cash only</span>
+                <span>No pets allowed · Cash or Bank Transfer</span>
               </div>
             </div>
           </div>

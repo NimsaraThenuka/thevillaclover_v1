@@ -1,6 +1,7 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { VILLA_IMAGES } from '../data/villaImages';
+import { NEARBY_PLACES } from '../data/nearbyPlaces';
 import {
   Car,
   Wifi,
@@ -8,7 +9,7 @@ import {
   Users,
   Wind,
   Trees,
-  PawPrint,
+  ShieldCheck,
   Sunrise,
   Star,
   MapPin,
@@ -24,7 +25,8 @@ import {
 import VillaVideoPlayer from '../components/VillaVideoPlayer';
 
 interface HomeProps {
-  onNavigate: (page: string) => void;
+  onNavigate: (page: string, extra?: string) => void;
+  scrollToSection?: string | null;
 }
 
 const reviews = [
@@ -34,7 +36,7 @@ const reviews = [
     country: 'Australia · August 2026',
   },
   {
-    quote: "An absolute oasis in Galle! The rooftop sun terrace at sunset was magical, and the lake view in the morning with birds singing made our Sri Lanka holiday truly unforgettable. Ganidu was an exceptional host.",
+    quote: "An absolute oasis in Galle! The rooftop at sunset was magical, and the peaceful morning with birds singing made our Sri Lanka holiday truly unforgettable. Ganidu was an exceptional host.",
     author: 'Sophie & Liam',
     country: 'United Kingdom · November 2026',
   },
@@ -54,7 +56,7 @@ const reviews = [
     country: 'Italy · December 2025',
   },
   {
-    quote: "Travelled with our parents and pet, and everyone fell in love with The Villa Clover. Safe, quiet, beautifully furnished, and top-tier Sri Lankan hospitality. We will definitely come back!",
+    quote: "Travelled with our family, and everyone fell in love with The Villa Clover. Safe, quiet, beautifully furnished, and top-tier Sri Lankan hospitality. We will definitely come back!",
     author: 'Priya & Rohan',
     country: 'India · October 2025',
   },
@@ -63,39 +65,46 @@ const reviews = [
 const amenities = [
   { icon: Car, label: 'Free Parking' },
   { icon: Wifi, label: 'Free WiFi' },
-  { icon: Plane, label: 'Airport Shuttle' },
+  { icon: Plane, label: 'Airport Hire' },
   { icon: Users, label: 'Family Rooms' },
-  { icon: Wind, label: 'Air Conditioning' },
-  { icon: Trees, label: 'Garden & Terrace' },
-  { icon: PawPrint, label: 'Pets Allowed' },
-  { icon: Sunrise, label: 'Lake & Garden View' },
+  { icon: Wind, label: 'Bedroom 1 AC' },
+  { icon: Trees, label: 'Garden & Rooftop' },
+  { icon: ShieldCheck, label: 'Safety Lockers' },
+  { icon: Sunrise, label: 'Lush Garden View' },
 ];
 
-export default function Home({ onNavigate }: HomeProps) {
+export default function Home({ onNavigate, scrollToSection }: HomeProps) {
   useScrollReveal();
   const [currentReview, setCurrentReview] = useState(0);
-  const [isFading, setIsFading] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    if (scrollToSection) {
+      const timer = setTimeout(() => {
+        const el = document.getElementById(scrollToSection);
+        if (el) {
+          const yOffset = -85;
+          const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [scrollToSection]);
 
   const changeReview = useCallback((newIndex: number) => {
-    setIsFading(true);
-    setTimeout(() => {
-      setCurrentReview(newIndex);
-      setIsFading(false);
-    }, 250);
+    setCurrentReview(newIndex);
   }, []);
 
   const nextReview = useCallback(() => {
-    changeReview((currentReview + 1) % reviews.length);
-  }, [currentReview, changeReview]);
+    setCurrentReview((prev) => (prev + 1) % reviews.length);
+  }, []);
 
   const prevReview = useCallback(() => {
-    changeReview((currentReview - 1 + reviews.length) % reviews.length);
-  }, [currentReview, changeReview]);
+    setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -104,9 +113,52 @@ export default function Home({ onNavigate }: HomeProps) {
     return () => clearInterval(timer);
   }, [nextReview]);
 
-  const handleNav = (page: string) => {
+  // ── NEARBY PLACES MULTI-CARD CAROUSEL ──
+  const [placesIndex, setPlacesIndex] = useState(0);
+  const [visiblePlacesCount, setVisiblePlacesCount] = useState(3);
+  const [isPlacesPaused, setIsPlacesPaused] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+
+  useEffect(() => {
+    const updateVisibleCount = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setVisiblePlacesCount(1);
+      } else if (width < 1024) {
+        setVisiblePlacesCount(2);
+      } else {
+        setVisiblePlacesCount(3);
+      }
+    };
+    updateVisibleCount();
+    window.addEventListener('resize', updateVisibleCount);
+    return () => window.removeEventListener('resize', updateVisibleCount);
+  }, []);
+
+  const maxPlacesIndex = Math.max(0, NEARBY_PLACES.length - visiblePlacesCount);
+
+  const nextPlace = useCallback(() => {
+    setPlacesIndex((prev) => (prev >= maxPlacesIndex ? 0 : prev + 1));
+  }, [maxPlacesIndex]);
+
+  const prevPlace = useCallback(() => {
+    setPlacesIndex((prev) => (prev <= 0 ? maxPlacesIndex : prev - 1));
+  }, [maxPlacesIndex]);
+
+  // Automatic smooth advance with guaranteed loop
+  useEffect(() => {
+    if (isPlacesPaused) return;
+
+    const interval = setInterval(() => {
+      nextPlace();
+    }, 3800);
+
+    return () => clearInterval(interval);
+  }, [isPlacesPaused, nextPlace]);
+
+  const handleNav = (page: string, extra?: string) => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-    onNavigate(page);
+    onNavigate(page, extra);
   };
 
   return (
@@ -308,17 +360,17 @@ export default function Home({ onNavigate }: HomeProps) {
               </h2>
               <div className="gold-divider mb-8" />
               <p className="text-gray-600 leading-relaxed mb-5" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.95rem' }}>
-                The Villa Clover in Galle offers a sun terrace and a lush garden. Guests can relax in the outdoor spaces and enjoy free WiFi throughout the property.
+                The Villa Clover in Galle offers a scenic rooftop and a lush garden. Guests can relax in the outdoor spaces, enjoy sunbeds and a hammock, and experience free WiFi throughout the property.
               </p>
               <p className="text-gray-600 leading-relaxed mb-8" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.95rem' }}>
-                The villa features two bedrooms and a living room. Each room is equipped with air-conditioning, a balcony, and a kitchenette  perfect for families, couples, or small groups seeking a quiet retreat.
+                The villa features two bedrooms and a living room. Both bedrooms include queen beds, safety lockers, iron & iron board, and washing machine access, with sunbeds and a hammock in the garden. Bedroom 1 is equipped with air conditioning, while Bedroom 2 is a non-AC room  perfect for families, couples, or small groups seeking a quiet retreat.
               </p>
               <div className="grid grid-cols-2 gap-6 mb-10">
                 {[
-                  { label: '2 Bedrooms', sub: 'King beds in each room' },
-                  { label: 'Galle, LK', sub: '2.8 km from Galle Fort' },
+                  { label: 'Two Queen Beds', sub: '2 comfortable bedrooms' },
+                  { label: 'Galle Fort', sub: '2.8 km to Galle Fort' },
                   { label: 'Private Villa', sub: 'Entire place is yours' },
-                  { label: 'Bonavista Beach', sub: '2.6 km away' },
+                  { label: 'Jungle Beach & Rumassala', sub: '2.8 km away' },
                 ].map((stat) => (
                   <div key={stat.label} className="border-l-2 pl-4" style={{ borderColor: '#c9a96e' }}>
                     <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.2rem', color: '#0d1b2a', fontWeight: 500 }}>
@@ -389,7 +441,7 @@ export default function Home({ onNavigate }: HomeProps) {
             {[
               {
                 url: VILLA_IMAGES.rooftopNight,
-                alt: 'Rooftop terrace night lounge',
+                alt: 'Rooftop night lounge',
                 span: 'col-span-2 lg:col-span-2 lg:row-span-2',
                 heightClass: 'h-56 sm:h-72 lg:h-full lg:min-h-[490px]',
               },
@@ -413,7 +465,7 @@ export default function Home({ onNavigate }: HomeProps) {
               },
               {
                 url: VILLA_IMAGES.gardenSwing,
-                alt: 'Tropical garden swing & river',
+                alt: 'Tropical garden swing',
                 span: 'col-span-1',
                 heightClass: 'h-36 sm:h-48 lg:h-[235px]',
               },
@@ -470,7 +522,7 @@ export default function Home({ onNavigate }: HomeProps) {
               {
                 icon: HomeIcon,
                 title: 'Entire Villa is Yours',
-                desc: 'Enjoy full privacy in your 2-bedroom sanctuary with rooftop sun terrace, lush tropical garden, and private balcony  exclusively yours.',
+                desc: 'Enjoy full privacy in your 2-bedroom sanctuary with scenic rooftop, lush tropical garden, sunbed, and hammock  exclusively yours.',
               },
               {
                 icon: HeartHandshake,
@@ -539,44 +591,54 @@ export default function Home({ onNavigate }: HomeProps) {
             "
           </div>
 
-          <div
-            className="transition-all duration-300 min-h-[160px] flex flex-col justify-center items-center"
-            style={{
-              opacity: isFading ? 0 : 1,
-              transform: isFading ? 'translateY(6px)' : 'translateY(0)',
-            }}
-          >
-            <p
-              style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: 'clamp(1.3rem, 3vw, 1.8rem)',
-                color: 'white',
-                fontWeight: 300,
-                lineHeight: 1.6,
-                fontStyle: 'italic',
-                marginBottom: '2.5rem',
-              }}
-            >
-              {reviews[currentReview].quote}
-            </p>
-            <div className="flex items-center justify-center gap-4">
-              <div
-                className="w-10 h-px"
-                style={{ background: 'rgba(201,169,110,0.5)' }}
-              />
-              <div className="text-center">
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.1rem', color: '#c9a96e' }}>
-                  {reviews[currentReview].author}
-                </p>
-                <p className="text-white/50 text-xs tracking-widest uppercase mt-1" style={{ fontFamily: 'Inter, sans-serif' }}>
-                  {reviews[currentReview].country}
-                </p>
-              </div>
-              <div
-                className="w-10 h-px"
-                style={{ background: 'rgba(201,169,110,0.5)' }}
-              />
-            </div>
+          {/* Stable Review Container - Zero Layout Shift Across Mobile & Desktop */}
+          <div className="grid grid-cols-1 items-center justify-items-center w-full min-h-[220px] sm:min-h-[180px] md:min-h-[150px]">
+            {reviews.map((rev, idx) => {
+              const isActive = currentReview === idx;
+              return (
+                <div
+                  key={idx}
+                  className={`col-start-1 row-start-1 w-full flex flex-col justify-center items-center transition-all duration-500 ease-out ${
+                    isActive
+                      ? 'opacity-100 scale-100 pointer-events-auto z-10'
+                      : 'opacity-0 scale-[0.98] pointer-events-none invisible z-0'
+                  }`}
+                  aria-hidden={!isActive}
+                >
+                  <p
+                    style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontSize: 'clamp(1.15rem, 2.8vw, 1.7rem)',
+                      color: 'white',
+                      fontWeight: 300,
+                      lineHeight: 1.6,
+                      fontStyle: 'italic',
+                      marginBottom: '1.75rem',
+                    }}
+                  >
+                    {rev.quote}
+                  </p>
+                  <div className="flex items-center justify-center gap-4">
+                    <div
+                      className="w-8 sm:w-10 h-px"
+                      style={{ background: 'rgba(201,169,110,0.5)' }}
+                    />
+                    <div className="text-center">
+                      <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.1rem', color: '#c9a96e' }}>
+                        {rev.author}
+                      </p>
+                      <p className="text-white/50 text-[11px] sm:text-xs tracking-widest uppercase mt-0.5" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        {rev.country}
+                      </p>
+                    </div>
+                    <div
+                      className="w-8 sm:w-10 h-px"
+                      style={{ background: 'rgba(201,169,110,0.5)' }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
           <div className="flex justify-center gap-1.5 mt-6">
@@ -618,89 +680,160 @@ export default function Home({ onNavigate }: HomeProps) {
         </div>
       </section>
 
-      {/* ── NEARBY ATTRACTIONS & EXPERIENCES ── */}
-      <section className="py-24 px-6 lg:px-12" style={{ background: '#f8f5f0' }}>
+      {/* ── NEARBY ATTRACTIONS & EXPERIENCES (Interactive Moving Places Slider) ── */}
+      <section
+        id="explore-galle"
+        className="py-20 sm:py-24 px-4 sm:px-6 lg:px-12 relative overflow-hidden scroll-mt-24"
+        style={{ background: '#f8f5f0' }}
+      >
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 reveal">
-            <p className="section-label mb-4">Prime Location</p>
-            <h2
-              style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: 'clamp(2rem, 4vw, 3.2rem)',
-                fontWeight: 400,
-                color: '#0d1b2a',
-              }}
-            >
-              Explore Galle & The Coast
-            </h2>
-            <div className="gold-divider mx-auto mt-6 mb-4" />
-            <p className="text-gray-600 max-w-xl mx-auto text-sm leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
-              From UNESCO World Heritage colonial ramparts to golden surf beaches and tropical lake safaris  the best of southern Sri Lanka is minutes away.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                title: 'Galle Fort',
-                distance: '2.8 km · 10 min',
-                desc: '17th-century UNESCO World Heritage site filled with charming boutiques, colonial ramparts, and picturesque sunset strolls.',
-                tag: 'Heritage',
-              },
-              {
-                title: 'Bonavista & Unawatuna',
-                distance: '3.5 km · 12 min',
-                desc: 'Golden sandy beaches, calm turquoise swimming waters, beachfront seafood dining, and vibrant tropical nightlife.',
-                tag: 'Beach & Surf',
-              },
-              {
-                title: 'Koggala Lake & Safari',
-                distance: '12 km · 20 min',
-                desc: 'Serene boat excursions exploring mangrove forests, cinnamon harvesting islands, and exotic bird sanctuaries.',
-                tag: 'Nature',
-              },
-              {
-                title: 'Mirissa Marine Safari',
-                distance: '32 km · 40 min',
-                desc: 'World-famous marine expeditions to spot magnificent blue whales, spinner dolphins, and breathtaking ocean horizons.',
-                tag: 'Wildlife',
-              },
-            ].map((place, i) => (
-              <div
-                key={place.title}
-                className={`reveal delay-${i * 150} p-7 flex flex-col justify-between`}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-10 gap-4 sm:gap-6 reveal">
+            <div>
+              <p className="section-label mb-2 sm:mb-3">Prime Location</p>
+              <h2
                 style={{
-                  background: '#ffffff',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: '2px',
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: 'clamp(1.8rem, 4vw, 3.2rem)',
+                  fontWeight: 400,
+                  color: '#0d1b2a',
+                  lineHeight: 1.15,
                 }}
               >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-[10px] tracking-widest uppercase font-semibold text-amber-700 px-2.5 py-0.5 bg-amber-50 rounded border border-amber-200">
-                      {place.tag}
-                    </span>
-                    <span className="text-gray-400 text-xs font-medium" style={{ fontFamily: 'Inter, sans-serif' }}>
-                      {place.distance}
-                    </span>
-                  </div>
-                  <h3
-                    style={{
-                      fontFamily: "'Cormorant Garamond', serif",
-                      fontSize: '1.4rem',
-                      color: '#0d1b2a',
-                      fontWeight: 600,
-                      marginBottom: '0.75rem',
-                    }}
+                Explore Galle & The Coast
+              </h2>
+              <div className="gold-divider mt-3 sm:mt-4 mb-3 sm:mb-4" />
+              <p className="text-gray-600 max-w-xl text-xs sm:text-sm leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
+                UNESCO Heritage ramparts, hidden jungle bays, world-class surf points, and coastal landmarks located just minutes from The Villa Clover.
+              </p>
+            </div>
+
+            {/* Slider Controls */}
+            <div className="flex items-center justify-end gap-2.5 sm:gap-3 self-end shrink-0">
+              <button
+                onClick={prevPlace}
+                className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-[#0d1b2a]/20 bg-white text-[#0d1b2a] hover:bg-[#0d1b2a] hover:text-[#c9a96e] hover:border-[#0d1b2a] flex items-center justify-center transition-all duration-300 shadow-xs hover:shadow-md cursor-pointer"
+                aria-label="Previous places"
+              >
+                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+              </button>
+              <button
+                onClick={nextPlace}
+                className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-[#0d1b2a]/20 bg-white text-[#0d1b2a] hover:bg-[#0d1b2a] hover:text-[#c9a96e] hover:border-[#0d1b2a] flex items-center justify-center transition-all duration-300 shadow-xs hover:shadow-md cursor-pointer"
+                aria-label="Next places"
+              >
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Full-Card Multi-Item Carousel (Zero Cropping, Guaranteed Loop) */}
+          <div
+            onMouseEnter={() => setIsPlacesPaused(true)}
+            onMouseLeave={() => setIsPlacesPaused(false)}
+            onTouchStart={(e) => {
+              setIsPlacesPaused(true);
+              touchStartX.current = e.touches[0].clientX;
+            }}
+            onTouchEnd={(e) => {
+              setIsPlacesPaused(false);
+              if (touchStartX.current !== null) {
+                const diff = touchStartX.current - e.changedTouches[0].clientX;
+                if (diff > 45) nextPlace();
+                else if (diff < -45) prevPlace();
+                touchStartX.current = null;
+              }
+            }}
+            className="relative overflow-hidden w-full py-2 -mx-2.5 sm:-mx-3"
+          >
+            <div
+              className="flex transition-transform duration-500 ease-out"
+              style={{
+                transform: `translateX(-${placesIndex * (100 / visiblePlacesCount)}%)`,
+              }}
+            >
+              {NEARBY_PLACES.map((place) => (
+                <div
+                  key={place.id}
+                  style={{ width: `${100 / visiblePlacesCount}%` }}
+                  className="shrink-0 px-2.5 sm:px-3 flex flex-col"
+                >
+                  <div
+                    onClick={() => handleNav('place-detail', place.id)}
+                    className="h-full flex flex-col justify-between bg-white rounded-xs border border-slate-200/90 shadow-xs hover:shadow-xl transition-all duration-300 cursor-pointer group hover:-translate-y-1 overflow-hidden"
                   >
-                    {place.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
-                    {place.desc}
-                  </p>
+                    {/* Image & Floating Badges */}
+                    <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+                      <img
+                        src={place.image}
+                        alt={place.title}
+                        loading="lazy"
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/20" />
+
+                      {/* Tag Badge */}
+                      <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3">
+                        <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[9px] sm:text-[10px] font-semibold tracking-wider uppercase bg-[#0d1b2a]/85 backdrop-blur-md text-[#c9a96e] border border-[#c9a96e]/30 rounded-xs">
+                          {place.tag}
+                        </span>
+                      </div>
+
+                      {/* Distance & Time Pill */}
+                      <div className="absolute bottom-2.5 right-2.5 sm:bottom-3 sm:right-3 flex items-center gap-1.5 px-2.5 py-0.5 sm:py-1 bg-black/75 backdrop-blur-md text-white rounded-full text-[11px] sm:text-xs font-medium border border-white/20">
+                        <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#c9a96e]" />
+                        <span>{place.distance}</span>
+                        <span className="text-white/40">·</span>
+                        <span className="text-white/80">{place.driveTime}</span>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-4 sm:p-6 flex flex-col justify-between flex-1">
+                      <div>
+                        <h3
+                          style={{
+                            fontFamily: "'Cormorant Garamond', serif",
+                            fontSize: 'clamp(1.25rem, 2.5vw, 1.45rem)',
+                            color: '#0d1b2a',
+                            fontWeight: 600,
+                            marginBottom: '0.4rem',
+                          }}
+                        >
+                          {place.title}
+                        </h3>
+                        <p className="text-gray-600 text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3" style={{ fontFamily: 'Inter, sans-serif' }}>
+                          {place.desc}
+                        </p>
+                      </div>
+
+                      <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] sm:text-xs text-slate-500 font-medium gap-2" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        <span className="flex items-center gap-1 sm:gap-1.5 text-amber-800 whitespace-nowrap shrink-0">
+                          <Compass className="w-3.5 h-3.5 text-[#c9a96e] shrink-0" />
+                          <span>From Villa Clover</span>
+                        </span>
+                        <span className="text-[#1e3a5f] font-semibold whitespace-nowrap shrink-0 flex items-center gap-1 group-hover:text-amber-700 transition-colors">
+                          <span>Discover</span>
+                          <span className="text-amber-600 font-bold">→</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center items-center gap-1 sm:gap-1.5 mt-6 sm:mt-8 flex-wrap px-4">
+            {Array.from({ length: maxPlacesIndex + 1 }).map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setPlacesIndex(idx)}
+                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  placesIndex === idx ? 'w-5 sm:w-7 bg-[#1e3a5f]' : 'w-1.5 sm:w-2 bg-slate-300 hover:bg-slate-400'
+                }`}
+                aria-label={`Go to slide ${idx + 1}`}
+              />
             ))}
           </div>
         </div>
@@ -731,8 +864,8 @@ export default function Home({ onNavigate }: HomeProps) {
             {[
               {
                 icon: Plane,
-                title: 'Airport Transfers',
-                desc: 'Comfortable air-conditioned private van or car transfers directly from Colombo (CMB) or Koggala airport.',
+                title: 'Airport Hire & Transfers',
+                desc: 'Comfortable air-conditioned private van or car transfers directly from Bandaranaike International Airport (Katunayake / CMB) or local pickup.',
               },
               {
                 icon: UtensilsCrossed,
@@ -742,7 +875,7 @@ export default function Home({ onNavigate }: HomeProps) {
               {
                 icon: Sparkles,
                 title: 'Rooftop Sundowners',
-                desc: 'Enjoy ambient evening fairy lights, private dining setups, and refreshing lake breezes on your private rooftop terrace.',
+                desc: 'Enjoy ambient evening fairy lights, private dining setups, and refreshing breezes on your private rooftop.',
               },
               {
                 icon: Compass,
@@ -791,7 +924,7 @@ export default function Home({ onNavigate }: HomeProps) {
           <VillaVideoPlayer
             badge="Video Tour"
             title="Villa Video Tour"
-            subtitle="Take a short walkthrough of The Villa Clover  our garden, terrace, and living spaces."
+            subtitle="Take a short walkthrough of The Villa Clover  our garden, rooftop, and living spaces."
             darkTheme={false}
           />
         </div>
@@ -823,15 +956,15 @@ export default function Home({ onNavigate }: HomeProps) {
               },
               {
                 q: 'How does payment and prepayment work?',
-                a: 'No advance prepayment is required. The Villa Clover accepts cash payments upon arrival at the property, making your booking completely risk-free and flexible.',
+                a: 'No advance prepayment is required. The Villa Clover accepts cash or bank transfer payments upon arrival at the property, making your booking completely flexible.',
               },
               {
                 q: 'Are pets allowed at the villa?',
-                a: 'Yes! Pets are warmly welcomed at The Villa Clover with no extra charges. Our secure garden and spacious terraces provide a comfortable setting for your pets.',
+                a: 'Pets are not allowed at The Villa Clover in order to maintain a clean, serene, and allergen-free environment for all our guests.',
               },
               {
                 q: 'What amenities and kitchen facilities are included?',
-                a: 'You enjoy the entire private 2-bedroom villa featuring full air conditioning, complimentary high-speed WiFi, private rooftop sun terrace, fully equipped kitchen (refrigerator, stove, electric kettle, cookware), washing machine, hot water showers, and private parking.',
+                a: 'You enjoy the entire private 2-bedroom villa featuring Bedroom 1 with air conditioning, Bedroom 2 (non-AC), comfortable queen beds, safety lockers, complimentary high-speed WiFi, scenic rooftop, sunbeds, hammock, fully equipped kitchen (refrigerator, stove, electric kettle, cookware), washing machine, iron and iron board, hot water showers, private parking, and airport hire on request.',
               },
             ].map((faq, idx) => {
               const isOpen = openFaq === idx;
@@ -900,7 +1033,7 @@ export default function Home({ onNavigate }: HomeProps) {
           </h2>
           <div className="gold-divider mx-auto mb-8" />
           <p className="text-gray-500 mb-10 leading-relaxed" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.95rem' }}>
-            Perfect for a 1-night stay or an extended getaway. No prepayment needed , pay at the property. Pets welcome at no extra charge.
+            Perfect for a 1-night stay or an extended getaway. No prepayment needed , pay via cash or bank transfer. Pets are not allowed.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button onClick={() => handleNav('contact')} className="btn-primary">

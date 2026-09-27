@@ -6,14 +6,36 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
+import PlaceDetail from './pages/PlaceDetail';
 
-type Page = 'home' | 'about' | 'gallery' | 'contact';
+export type Page = 'home' | 'about' | 'gallery' | 'contact' | 'place-detail';
 
 export default function App() {
   const [page, setPage] = useState<Page>('home');
+  const [selectedPlaceId, setSelectedPlaceId] = useState<string | null>(null);
+  const [targetSection, setTargetSection] = useState<string | null>(null);
 
-  const navigate = (p: string) => {
-    setPage(p as Page);
+  const navigate = (p: string, extra?: string) => {
+    if (p === 'place-detail' && extra) {
+      setSelectedPlaceId(extra);
+      setTargetSection(null);
+      setPage('place-detail');
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+    } else if (p === 'home') {
+      if (extra) {
+        setTargetSection(extra);
+      } else {
+        setTargetSection(null);
+      }
+      setPage('home');
+      if (!extra) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+      }
+    } else {
+      setTargetSection(null);
+      setPage(p as Page);
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+    }
   };
 
   const renderPage = () => {
@@ -24,8 +46,10 @@ export default function App() {
         return <Gallery onNavigate={navigate} />;
       case 'contact':
         return <Contact />;
+      case 'place-detail':
+        return <PlaceDetail placeId={selectedPlaceId} onNavigate={navigate} />;
       default:
-        return <Home onNavigate={navigate} />;
+        return <Home onNavigate={navigate} scrollToSection={targetSection} />;
     }
   };
 

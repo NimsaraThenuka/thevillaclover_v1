@@ -10,6 +10,7 @@ import {
   Palmtree,
   Train,
   Plane,
+  Trophy,
   ShieldCheck,
   PawPrint,
   RotateCcw,
@@ -18,13 +19,13 @@ import {
 } from 'lucide-react';
 
 interface AboutProps {
-  onNavigate: (page: string) => void;
+  onNavigate: (page: string, extra?: string) => void;
 }
 
 const facilityGroups = [
   {
     label: 'Outdoors',
-    items: ['Sun terrace', 'BBQ facilities', 'Balcony', 'Terrace', 'Lush garden'],
+    items: ['Rooftop', 'BBQ facilities', 'Sunbed', 'Hammock', 'Lush garden'],
   },
   {
     label: 'Kitchen',
@@ -32,31 +33,32 @@ const facilityGroups = [
   },
   {
     label: 'Bedroom & Bath',
-    items: ['King beds', 'Free toiletries', 'Hairdryer', 'Shower', 'Safety deposit box'],
+    items: ['Queen beds (both rooms)', 'Bedroom 1 Air Conditioning', 'Safety lockers', 'Free toiletries', 'Hairdryer', 'Shower'],
   },
   {
     label: 'Tech & Comfort',
-    items: ['Free WiFi', 'Flat-screen TV', 'Air conditioning', 'Desk', 'Sofa & lounge'],
+    items: ['Free WiFi', 'Flat-screen TV', 'Iron & iron board', 'Desk', 'Sofa & lounge'],
   },
   {
     label: 'Services',
-    items: ['Airport shuttle', 'Ironing service', 'Laundry', 'Private parking', 'Baby safety gates'],
+    items: ['Airport hire & transfers', 'Ironing facilities', 'Laundry & washing machine', 'Private parking', 'Baby safety gates'],
   },
   {
     label: 'Safety',
-    items: ['Fire extinguishers', 'CCTV outside', 'Key access', '24-hour security', 'Smoke-free property'],
+    items: ['Safety lockers', 'Fire extinguishers', 'CCTV outside', 'Key access', 'Smoke-free property'],
   },
 ];
 
 const nearby = [
-  { name: 'Bonavista Beach', dist: '2.6 km', icon: Waves },
-  { name: 'Galle Fort', dist: '2.8 km', icon: Landmark },
-  { name: 'Galle Fort Lighthouse', dist: '4.1 km', icon: Compass },
-  { name: 'National Maritime Museum', dist: '3.6 km', icon: Anchor },
-  { name: 'Koggala Lake', dist: '~8 km', icon: Sailboat },
-  { name: 'Unawatuna Beach', dist: '~7 km', icon: Palmtree },
-  { name: 'Galle Railway Station', dist: '3.4 km', icon: Train },
-  { name: 'Koggala Airport', dist: '13 km', icon: Plane },
+  { id: 'old-dutch-hospital', name: 'Old Dutch Hospital', dist: '4 km', icon: Landmark },
+  { id: 'meeran-mosque', name: 'Meeran Jumma Mosque', dist: '3.2 km', icon: Compass },
+  { id: 'dalawella-beach', name: 'Dalawella Beach', dist: '7.8 km', icon: Palmtree },
+  { id: 'peace-pagoda', name: 'Japanese Peace Pagoda', dist: '5.5 km', icon: Landmark },
+  { id: 'maritime-museum', name: 'Galle Maritime Museum', dist: '3.9 km', icon: Anchor },
+  { id: 'galle-stadium', name: 'Galle International Stadium', dist: '3.3 km', icon: Trophy },
+  { id: 'dewata-beach', name: 'Dewata Beach', dist: '3.9 km', icon: Waves },
+  { id: 'angel-beach', name: 'Angel Beach', dist: '7.8 km', icon: Waves },
+  { id: 'koggala-airport', name: 'Koggala Airport (visit place)', dist: '13 km', icon: Plane },
 ];
 
 export default function About({ onNavigate }: AboutProps) {
@@ -126,7 +128,7 @@ export default function About({ onNavigate }: AboutProps) {
               </h2>
               <div className="gold-divider mb-8" />
               <p className="text-gray-600 leading-relaxed mb-5" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.95rem' }}>
-                The Villa Clover is a private, fully air-conditioned 2-bedroom villa designed for travelers seeking a blend of modern comfort, space, and authentic Sri Lankan warmth. Set in a peaceful residential neighborhood, our property offers a quiet retreat with lush garden views, a private balcony, and an exclusive rooftop terrace perfect for morning coffee or evening sunsets.
+                The Villa Clover is a private 2-bedroom villa designed for travelers seeking a blend of modern comfort, space, and authentic Sri Lankan warmth. Set in a peaceful residential neighborhood, our property offers a quiet retreat with lush garden views, an exclusive rooftop perfect for morning coffee or evening sunsets, sunbeds, and a relaxing hammock.
               </p>
               <p className="text-gray-600 leading-relaxed mb-5" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.95rem' }}>
                 We take pride in delivering personalised hospitality. From smooth check-ins and welcoming hot tea to assisting with local transport, tuk-tuks, and insider tips for Galle Fort and nearby beaches. we are dedicated to making your stay seamless and unforgettable.
@@ -154,7 +156,7 @@ export default function About({ onNavigate }: AboutProps) {
               <div className="img-zoom" style={{ borderRadius: '2px' }}>
                 <img
                   src={VILLA_IMAGES.rooftopDay}
-                  alt="Rooftop terrace and lounge"
+                  alt="Rooftop lounge"
                   loading="lazy"
                   decoding="async"
                   className="w-full object-cover h-60"
@@ -199,31 +201,77 @@ export default function About({ onNavigate }: AboutProps) {
             </h2>
             <div className="gold-divider mx-auto mt-6 mb-4" />
             <p className="text-gray-500 max-w-lg mx-auto text-sm leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>
-              Entire villa · Private kitchen · Balcony · Lake view · Garden view · Air conditioning · Terrace · Free WiFi
+              Entire villa · Private kitchen · Rooftop · Garden view · Queen beds · Free WiFi
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             {[
               {
-                title: 'Bedroom 1',
-                desc: '1 large double bed with plush bedding, air conditioning, and garden views with solid wood furnishings.',
+                title: 'Bedroom 1 (AC Room)',
+                desc: 'Comfortable master suite featuring 1 queen bed, air conditioning, and garden views with solid wood furnishings.',
                 img: VILLA_IMAGES.bedroom1,
+                features: [
+                  'Queen Bed',
+                  'Air Conditioning',
+                  'Safety Locker',
+                  'Iron Board & Iron',
+                  'Washing Machine Access',
+                  'Sunbed Access',
+                  'Garden Hammock',
+                  'Airport Hire (Available)',
+                ],
               },
               {
-                title: 'Bedroom 2',
-                desc: '1 large double bed, air conditioning, private vanity desk, and modern comforts within reach.',
+                title: 'Bedroom 2 (Non-AC)',
+                desc: 'Comfortable guest suite featuring 1 queen bed, private vanity desk, and garden views.',
                 img: VILLA_IMAGES.bedroom2,
+                features: [
+                  'Queen Bed',
+                  'Non-AC Room',
+                  'Safety Locker',
+                  'Iron Board & Iron',
+                  'Washing Machine Access',
+                  'Sunbed Access',
+                  'Garden Hammock',
+                  'Airport Hire (Available)',
+                ],
               },
             ].map((room, i) => (
-              <div key={room.title} className={`reveal-scale delay-${i * 200}`}>
-                <div className="img-zoom mb-6" style={{ borderRadius: '2px' }}>
-                  <img src={room.img} alt={room.title} loading="lazy" className="w-full object-cover h-64" />
+              <div
+                key={room.title}
+                className={`reveal-scale delay-${i * 200} p-5 sm:p-7 rounded-sm flex flex-col justify-between`}
+                style={{
+                  background: '#ffffff',
+                  border: '1px solid #e2e8f0',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
+                }}
+              >
+                <div>
+                  <div className="img-zoom mb-6" style={{ borderRadius: '2px' }}>
+                    <img src={room.img} alt={room.title} loading="lazy" className="w-full object-cover h-64" />
+                  </div>
+                  <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.55rem', color: '#0d1b2a', marginBottom: '0.5rem', fontWeight: 600 }}>
+                    {room.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed mb-6" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    {room.desc}
+                  </p>
                 </div>
-                <h3 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.5rem', color: '#0d1b2a', marginBottom: '0.75rem' }}>
-                  {room.title}
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed" style={{ fontFamily: 'Inter, sans-serif' }}>{room.desc}</p>
+
+                <div className="pt-4 border-t border-gray-100">
+                  <p className="text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase text-amber-800 mb-3" style={{ fontFamily: 'Inter, sans-serif' }}>
+                    Included Features & Amenities:
+                  </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+                    {room.features.map((feat) => (
+                      <div key={feat} className="flex items-start gap-2 text-xs sm:text-[13px] text-gray-700 leading-tight" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        <Check className="w-3.5 h-3.5 text-[#c9a96e] shrink-0 mt-0.5" />
+                        <span>{feat}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -232,9 +280,9 @@ export default function About({ onNavigate }: AboutProps) {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 reveal">
             {[
               { icon: ShieldCheck, label: 'No Prepayment', sub: 'Pay at the property' },
-              { icon: PawPrint, label: 'Pets Welcome', sub: 'No extra charges' },
+              { icon: PawPrint, label: 'No Pets Allowed', sub: 'Allergen-free stay' },
               { icon: RotateCcw, label: 'Free Cancellation', sub: 'Costs 50% to cancel' },
-              { icon: Banknote, label: 'Cash Only', sub: 'No credit card needed' },
+              { icon: Banknote, label: 'Cash / Bank Transfer', sub: 'Flexible payment options' },
             ].map((p) => {
               const IconComponent = p.icon;
               return (
@@ -320,29 +368,42 @@ export default function About({ onNavigate }: AboutProps) {
               </h2>
               <div className="gold-divider mb-8" />
               <p className="text-gray-600 leading-relaxed mb-8" style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.95rem' }}>
-                Spend your days exploring colonial Galle Fort streets, boutique cafes, and the Maritime Museum, or take a quick drive to Unawatuna and Jungle Beach. Day trips to Hikkaduwa coral reefs, Koggala Lake boat safaris, and Mirissa whale watching are easily arranged from the villa.
+                Spend your days exploring the Old Dutch Hospital and Galle Maritime Museum, catch a match at Galle International Stadium, or relax at Dewata, Dalawella, and Angel Beach. Iconic landmarks including Meeran Jumma Mosque and Japanese Peace Pagoda are just minutes away from the villa.
               </p>
 
-              <div className="grid grid-cols-1 gap-3">
+              <div className="grid grid-cols-1 gap-2 sm:gap-3">
                 {nearby.map((place, i) => {
                   const PlaceIcon = place.icon;
                   return (
                     <div
                       key={place.name}
-                      className={`reveal delay-${Math.min(i * 80, 500)} flex items-center justify-between py-3.5 px-4`}
+                      onClick={() => {
+                        window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+                        onNavigate('place-detail', place.id);
+                      }}
+                      className={`reveal delay-${Math.min(i * 80, 500)} flex items-center justify-between py-2.5 sm:py-3.5 px-2 sm:px-4 gap-2 hover:bg-slate-50 transition-colors cursor-pointer group`}
                       style={{ borderBottom: '1px solid #eef2f7' }}
                     >
-                      <div className="flex items-center gap-3.5">
-                        <div className="w-8 h-8 rounded-full flex items-center justify-center bg-[#1e3a5f]/5 text-[#1e3a5f]">
-                          <PlaceIcon className="w-4 h-4" />
+                      <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0 flex-1">
+                        <div className="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-full flex items-center justify-center bg-[#1e3a5f]/5 text-[#1e3a5f] group-hover:bg-[#1e3a5f] group-hover:text-[#c9a96e] transition-colors">
+                          <PlaceIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         </div>
-                        <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '0.9rem', color: '#2d3748' }}>
+                        <span
+                          className="text-xs sm:text-sm font-medium text-gray-800 truncate sm:whitespace-normal group-hover:text-[#1e3a5f] transition-colors"
+                          style={{ fontFamily: 'Inter, sans-serif' }}
+                        >
                           {place.name}
                         </span>
                       </div>
-                      <span className="text-sm font-medium" style={{ color: '#1e3a5f', fontFamily: 'Inter, sans-serif' }}>
-                        {place.dist}
-                      </span>
+                      <div className="flex items-center gap-1.5 shrink-0 ml-2">
+                        <span
+                          className="text-xs sm:text-sm font-semibold whitespace-nowrap group-hover:text-amber-700 transition-colors"
+                          style={{ color: '#1e3a5f', fontFamily: 'Inter, sans-serif' }}
+                        >
+                          {place.dist}
+                        </span>
+                        <span className="text-xs text-gray-400 group-hover:translate-x-0.5 group-hover:text-amber-700 transition-all">→</span>
+                      </div>
                     </div>
                   );
                 })}
@@ -353,7 +414,7 @@ export default function About({ onNavigate }: AboutProps) {
               <div className="img-zoom mb-6" style={{ borderRadius: '2px' }}>
                 <img
                   src={VILLA_IMAGES.locationCard}
-                  alt="The Villa Clover garden swing by the lake"
+                  alt="The Villa Clover garden swing"
                   loading="lazy"
                   decoding="async"
                   className="w-full object-cover h-80"
@@ -383,7 +444,7 @@ export default function About({ onNavigate }: AboutProps) {
                   </div>
                   <div>
                     <p style={{ color: '#c9a96e', fontFamily: "'Cormorant Garamond', serif", fontSize: '1rem', marginBottom: '0.25rem' }}>Pets</p>
-                    <p>Welcome · Free</p>
+                    <p>Not permitted</p>
                   </div>
                   <div>
                     <p style={{ color: '#c9a96e', fontFamily: "'Cormorant Garamond', serif", fontSize: '1rem', marginBottom: '0.25rem' }}>Language</p>

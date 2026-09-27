@@ -47,15 +47,15 @@ export default function Contact() {
     },
     {
       q: 'Are pets allowed?',
-      a: 'Yes, pets are welcome at The Villa Clover at no extra charge.',
+      a: 'No, pets are not allowed at The Villa Clover.',
     },
     {
       q: 'What payment methods are accepted?',
-      a: 'The Villa Clover accepts cash payments only. No prepayment is needed, you pay at the property.',
+      a: 'The Villa Clover accepts cash or bank transfer payments. No prepayment is needed, you pay upon arrival at the property.',
     },
     {
       q: 'How far is the villa from the airport?',
-      a: 'Koggala Airport is 13 km from the villa. We offer airport shuttle service, please contact us to arrange in advance.',
+      a: 'Bandaranaike International Airport (Katunayake / CMB) is the main international airport (~150 km via the Southern Expressway). Koggala Airport (visit place) is 13 km away. We offer airport hire and shuttle service, please contact us to arrange in advance.',
     },
     {
       q: 'How far is Galle Fort?',
@@ -354,14 +354,14 @@ export default function Contact() {
                 {
                   icon: Banknote,
                   label: 'Payment',
-                  value: 'Cash only · No prepayment needed',
+                  value: 'Cash or Bank Transfer',
                   sub: 'US$50 refundable security deposit on arrival',
                 },
                 {
                   icon: Plane,
-                  label: 'Airport',
-                  value: 'Koggala Airport · 13 km',
-                  sub: 'Airport shuttle available on request',
+                  label: 'Airport & Transfers',
+                  value: 'Katunayake (CMB) · Airport hire available',
+                  sub: ' Shuttle on request',
                 },
               ].map((info) => {
                 const IconComponent = info.icon;

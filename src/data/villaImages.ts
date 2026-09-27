@@ -3,7 +3,7 @@
 export const VILLA_IMAGES = {
   // Hero & Headers (Instant Local Loading)
   hero: '/images/villa/dsc08315-hdr.webp', // Daytime Full Villa View
-  aboutHeader: '/images/villa/dsc08686-hdr.webp', // Rooftop Sun Terrace Day
+  aboutHeader: '/images/villa/dsc08686-hdr.webp', // Rooftop Day
   galleryHeader: '/images/villa/dsc09190-hdr.webp', // Twilight Night View
   contactHeader: '/images/villa/dsc09223-hdr.webp', // Evening Lit Villa
   reviewBg: '/images/villa/dsc09298-hdr.webp', // Fairy Lit Rooftop
@@ -11,8 +11,8 @@ export const VILLA_IMAGES = {
   // Featured sections
   introExterior: '/images/villa/dsc08276-hdr.webp', // Villa Lawn & Veranda
   contactVillaCard: '/images/villa/dsc09193-hdr.webp', // Night glowing villa
-  locationCard: '/images/villa/dsc08392-hdr.webp', // Garden swing & lake
-
+  locationCard: '/images/villa/dsc08392-hdr.webp', // Garden swing
+  
   // Bedrooms
   bedroom1: '/images/villa/dsc09012.webp', // Bedroom 1 with wardrobe
   bedroom1Close: '/images/villa/dsc09003.webp', // Bedroom 1 bed
@@ -27,942 +27,305 @@ export const VILLA_IMAGES = {
   bathroom: '/images/villa/dsc09094.webp', // Modern bathroom
 
   // Garden & Outdoors
-  gardenSwing: '/images/villa/dsc08392-hdr.webp', // Garden swing & lake view
+  gardenSwing: '/images/villa/dsc08392-hdr.webp', // Garden swing
   gardenPath: '/images/villa/dsc08380-hdr.webp', // Tropical garden path
   verandaPath: '/images/villa/dsc08321-hdr.webp', // Veranda view
   frontPorch: '/images/villa/dsc08300-hdr.webp', // Front porch
   nightGarden: '/images/villa/dsc09217-hdr.webp', // Night garden
-  rooftopDay: '/images/villa/dsc08686-hdr.webp', // Rooftop terrace day
-  rooftopNight: '/images/villa/dsc09298-hdr.webp', // Rooftop terrace night
+  rooftopDay: '/images/villa/dsc08686-hdr.webp', // Rooftop day
+  rooftopNight: '/images/villa/dsc09298-hdr.webp', // Rooftop night
 };
 
 export interface GalleryPhoto {
   url: string;
   alt: string;
-  category: 'Exterior' | 'Interior' | 'Garden' | 'Terrace' | 'Video';
+  category: 'Exterior' | 'Interior' | 'Garden' | 'Rooftop' | 'Video';
   wide?: boolean;
   isVideo?: boolean;
   videoUrl?: string;
 }
 
 export const GALLERY_PHOTOS: GalleryPhoto[] = [
+  // ── VIDEO TOUR (1 Item) ──
   {
     url: '/images/villa/dsc08315-hdr.webp',
     videoUrl: '/video/villa-tour.mp4',
-    alt: 'The Villa Clover - Villa Video Tour',
+    alt: 'The Villa Clover - Full Villa Video Tour',
     category: 'Video',
     isVideo: true,
   },
+
+  // ── EXTERIOR (10 Unique, Distinct Angles - No Repeating Night Shots) ──
   {
-    "url": "/images/villa/dsc08276-hdr.webp",
-    "alt": "Villa Clover Exterior & Entrance",
-    "category": "Exterior",
-    "wide": true
+    url: '/images/villa/dsc08315-hdr.webp',
+    alt: 'The Villa Clover - Daytime Full Villa View',
+    category: 'Exterior',
+    wide: true,
   },
   {
-    "url": "/images/villa/dsc08279-hdr.webp",
-    "alt": "Villa Clover Exterior & Entrance",
-    "category": "Exterior",
-    "wide": true
+    url: '/images/villa/dsc08276-hdr.webp',
+    alt: 'Villa Front Lawn & Architectural Veranda',
+    category: 'Exterior',
+    wide: true,
   },
   {
-    "url": "/images/villa/dsc08283-hdr.webp",
-    "alt": "Villa Clover Exterior & Entrance",
-    "category": "Exterior",
-    "wide": true
+    url: '/images/villa/dsc08300-hdr.webp',
+    alt: 'Front Porch & Welcoming Villa Entrance',
+    category: 'Exterior',
   },
   {
-    "url": "/images/villa/dsc08291-hdr.webp",
-    "alt": "Villa Clover Exterior & Entrance",
-    "category": "Exterior",
-    "wide": true
+    url: '/images/villa/dsc08321-hdr.webp',
+    alt: 'Outdoor Veranda Corridor & Shaded Seating',
+    category: 'Exterior',
   },
   {
-    "url": "/images/villa/dsc08294-hdr.webp",
-    "alt": "Villa Clover Exterior & Entrance",
-    "category": "Exterior",
-    "wide": true
+    url: '/images/villa/dsc08333-hdr.webp',
+    alt: 'Villa Facade Surrounded by Tropical Greenery',
+    category: 'Exterior',
   },
   {
-    "url": "/images/villa/dsc08297-hdr.webp",
-    "alt": "Villa Clover Exterior & Entrance",
-    "category": "Exterior",
-    "wide": true
+    url: '/images/villa/dsc08342-hdr.webp',
+    alt: 'Villa Side Veranda & Garden Walkway',
+    category: 'Exterior',
   },
   {
-    "url": "/images/villa/dsc08300-hdr.webp",
-    "alt": "Villa Clover Exterior & Entrance",
-    "category": "Exterior",
-    "wide": true
+    url: '/images/villa/dsc08348.webp',
+    alt: 'Villa Clover Main Entryway & Gate Approach',
+    category: 'Exterior',
   },
   {
-    "url": "/images/villa/dsc08303-hdr.webp",
-    "alt": "Villa Clover Exterior & Entrance",
-    "category": "Exterior",
-    "wide": true
+    url: '/images/villa/dsc09190-hdr.webp',
+    alt: 'Villa Clover Twilight View with Golden Ambient Lighting',
+    category: 'Exterior',
+    wide: true,
   },
   {
-    "url": "/images/villa/dsc08315-hdr.webp",
-    "alt": "Villa Clover Exterior & Entrance",
-    "category": "Exterior",
-    "wide": true
+    url: '/images/villa/dsc09232-hdr.webp',
+    alt: 'Illuminated Veranda & Cozy Night Patio',
+    category: 'Exterior',
   },
   {
-    "url": "/images/villa/dsc08321-hdr.webp",
-    "alt": "Villa Clover Exterior & Entrance",
-    "category": "Exterior",
-    "wide": true
+    url: '/images/villa/dsc09259-hdr.webp',
+    alt: 'Private Villa Grounds & Garden Pathway at Dusk',
+    category: 'Exterior',
   },
+
+  // ── INTERIOR (24 Unique Photos - 1 Per Specific Angle) ──
+  // Living & Lounge
   {
-    "url": "/images/villa/dsc08327-hdr.webp",
-    "alt": "Villa Clover Exterior & Entrance",
-    "category": "Exterior",
-    "wide": true
+    url: '/images/villa/dsc08764-hdr.webp',
+    alt: 'Spacious Modern Living Room with Comfortable Lounge',
+    category: 'Interior',
+    wide: true,
   },
   {
-    "url": "/images/villa/dsc08333-hdr.webp",
-    "alt": "Villa Clover Exterior & Entrance",
-    "category": "Exterior",
-    "wide": true
+    url: '/images/villa/dsc08753-hdr.webp',
+    alt: 'Living Room Seating Area & Teak Furnishings',
+    category: 'Interior',
   },
   {
-    "url": "/images/villa/dsc08342-hdr.webp",
-    "alt": "Villa Clover Exterior & Entrance",
-    "category": "Exterior",
-    "wide": true
+    url: '/images/villa/dsc08770-hdr.webp',
+    alt: 'Modern Sofa Lounge with Contemporary Sri Lankan Art',
+    category: 'Interior',
   },
   {
-    "url": "/images/villa/dsc08348.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08783-hdr.webp',
+    alt: 'Open-Plan Living Hall & High Ceiling Design',
+    category: 'Interior',
   },
+  // Dining & Kitchen
   {
-    "url": "/images/villa/dsc08353-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08795-hdr.webp',
+    alt: 'Dining Hall with Solid Wood Dining Table',
+    category: 'Interior',
+    wide: true,
   },
   {
-    "url": "/images/villa/dsc08354-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08820.webp',
+    alt: 'Dining Table Setup with Elegant Tableware',
+    category: 'Interior',
   },
   {
-    "url": "/images/villa/dsc08360-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08874.webp',
+    alt: 'Fully Equipped Kitchen with Refrigerator & Gas Cooker',
+    category: 'Interior',
   },
   {
-    "url": "/images/villa/dsc08365-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08889.webp',
+    alt: 'Modern Kitchen Countertops & Preparation Area',
+    category: 'Interior',
   },
   {
-    "url": "/images/villa/dsc08371-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08908-hdr.webp',
+    alt: 'Open Flow Dining & Fully Equipped Modern Kitchen',
+    category: 'Interior',
   },
   {
-    "url": "/images/villa/dsc08372-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08932-hdr.webp',
+    alt: 'Kitchen Cookware, Coffee Maker & Appliances',
+    category: 'Interior',
   },
+  // Bedroom 1 (AC Master Suite)
   {
-    "url": "/images/villa/dsc08372.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc09012.webp',
+    alt: 'Bedroom 1 (AC) - Luxury Queen Bed with Built-in Wardrobe',
+    category: 'Interior',
+    wide: true,
   },
   {
-    "url": "/images/villa/dsc08380-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc09003.webp',
+    alt: 'Bedroom 1 (AC) - Plush Queen Bed with Fresh Linen',
+    category: 'Interior',
   },
   {
-    "url": "/images/villa/dsc08384-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc09015.webp',
+    alt: 'Bedroom 1 (AC) - Bedside Lighting & Reading Corner',
+    category: 'Interior',
   },
   {
-    "url": "/images/villa/dsc08389-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc09027.webp',
+    alt: 'Bedroom 1 (AC) - Spacious Room Layout with Air Conditioning',
+    category: 'Interior',
   },
   {
-    "url": "/images/villa/dsc08392-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc09046.webp',
+    alt: 'Bedroom 1 (AC) - Contemporary Minimalist Bedroom Decor',
+    category: 'Interior',
   },
+  // Bedroom 2 (Queen Bed)
   {
-    "url": "/images/villa/dsc08396-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08955.webp',
+    alt: 'Bedroom 2 - Queen Bed with Vanity Mirror & Dressing Table',
+    category: 'Interior',
+    wide: true,
   },
   {
-    "url": "/images/villa/dsc08399-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08949.webp',
+    alt: 'Bedroom 2 - Comfortable Queen Bed Setup with Crisp Linens',
+    category: 'Interior',
   },
   {
-    "url": "/images/villa/dsc08404-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08967.webp',
+    alt: 'Bedroom 2 - Ambient Room Lighting & Garden Breeze Windows',
+    category: 'Interior',
   },
   {
-    "url": "/images/villa/dsc08405-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08985.webp',
+    alt: 'Bedroom 2 - Cozy Bedroom Corner & Ample Storage',
+    category: 'Interior',
   },
+  // Bathrooms
   {
-    "url": "/images/villa/dsc08408-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc09094.webp',
+    alt: 'En-suite Bathroom with Modern Walk-in Rain Shower',
+    category: 'Interior',
   },
   {
-    "url": "/images/villa/dsc08411-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc09103.webp',
+    alt: 'Contemporary Bathroom Vanity Mirror & Granite Basin',
+    category: 'Interior',
   },
   {
-    "url": "/images/villa/dsc08416-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc09125.webp',
+    alt: 'Clean Modern Bathroom Fixtures & Fresh Bath Linens',
+    category: 'Interior',
   },
   {
-    "url": "/images/villa/dsc08419-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc09143.webp',
+    alt: 'Sleek Ceramic Wash Basin & Polished Chrome Faucets',
+    category: 'Interior',
   },
   {
-    "url": "/images/villa/dsc08423-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc09160.webp',
+    alt: 'Modern Bathroom Amenities & Rainfall Shower Detail',
+    category: 'Interior',
   },
+
+  // ── GARDEN (9 Unique Photos - 1 Per Feature) ──
   {
-    "url": "/images/villa/dsc08426-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08365-hdr.webp',
+    alt: 'Green Lawn & Mature Coconut Palms at Villa Clover',
+    category: 'Garden',
+    wide: true,
   },
   {
-    "url": "/images/villa/dsc08429-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08380-hdr.webp',
+    alt: 'Stone Garden Pathway Winding through Tropical Greenery',
+    category: 'Garden',
   },
   {
-    "url": "/images/villa/dsc08432-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08392-hdr.webp',
+    alt: 'Relaxing Garden Swing Hanging Under Shady Trees',
+    category: 'Garden',
+    wide: true,
   },
   {
-    "url": "/images/villa/dsc08441-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08411-hdr.webp',
+    alt: 'Sunlit Private Garden Surrounded by Exotic Flora',
+    category: 'Garden',
   },
   {
-    "url": "/images/villa/dsc08453-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08423-hdr.webp',
+    alt: 'Peaceful Garden Corner & Tropical Tree Canopy',
+    category: 'Garden',
   },
   {
-    "url": "/images/villa/dsc08468-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08441-hdr.webp',
+    alt: 'Vibrant Tropical Garden Blooms & Foliage',
+    category: 'Garden',
   },
   {
-    "url": "/images/villa/dsc08480-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08480-hdr.webp',
+    alt: 'Tropical Palm Fronds & Landscaped Garden Details',
+    category: 'Garden',
   },
   {
-    "url": "/images/villa/dsc08491-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08535-hdr.webp',
+    alt: 'Serene Nature Pathway Surrounding the Villa Grounds',
+    category: 'Garden',
   },
   {
-    "url": "/images/villa/dsc08494-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08557-hdr.webp',
+    alt: 'Private Tropical Garden Perimeter & Calming Oasis',
+    category: 'Garden',
   },
+
+  // ── ROOFTOP (7 Unique Angles - Only 1 Night Fairy Light Shot) ──
   {
-    "url": "/images/villa/dsc08535-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08686-hdr.webp',
+    alt: 'Spacious Rooftop Sun Terrace with Open Sky Views',
+    category: 'Rooftop',
+    wide: true,
   },
   {
-    "url": "/images/villa/dsc08536-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08680.webp',
+    alt: 'Panoramic Rooftop Relaxation Area Overlooking Nature',
+    category: 'Rooftop',
   },
   {
-    "url": "/images/villa/dsc08551-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08717.webp',
+    alt: 'Rooftop Lounge Seating for Morning Coffee & Yoga',
+    category: 'Rooftop',
   },
   {
-    "url": "/images/villa/dsc08557-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08728-hdr.webp',
+    alt: 'Rooftop Terrace with Surrounding Green Tree Canopy',
+    category: 'Rooftop',
   },
   {
-    "url": "/images/villa/dsc08560-hdr.webp",
-    "alt": "Lush Tropical Garden & Lake View",
-    "category": "Garden",
-    "wide": true
+    url: '/images/villa/dsc08746-hdr.webp',
+    alt: 'Upper Rooftop Terrace & Staircase Access',
+    category: 'Rooftop',
   },
   {
-    "url": "/images/villa/dsc08680.webp",
-    "alt": "Rooftop Sun Deck & Views",
-    "category": "Terrace",
-    "wide": true
+    url: '/images/villa/dsc09298-hdr.webp',
+    alt: 'Enchanting Rooftop Under Warm Evening Fairy Lights',
+    category: 'Rooftop',
+    wide: true,
   },
   {
-    "url": "/images/villa/dsc08683.webp",
-    "alt": "Rooftop Sun Deck & Views",
-    "category": "Terrace",
-    "wide": true
+    url: '/images/villa/dsc09390.webp',
+    alt: 'Rooftop Twilight Perspective Overlooking Green Canopy',
+    category: 'Rooftop',
   },
-  {
-    "url": "/images/villa/dsc08686-hdr.webp",
-    "alt": "Rooftop Sun Deck & Views",
-    "category": "Terrace",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08687.webp",
-    "alt": "Rooftop Sun Deck & Views",
-    "category": "Terrace",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08717.webp",
-    "alt": "Rooftop Sun Deck & Views",
-    "category": "Terrace",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08725.webp",
-    "alt": "Rooftop Sun Deck & Views",
-    "category": "Terrace",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08728-hdr.webp",
-    "alt": "Rooftop Sun Deck & Views",
-    "category": "Terrace",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08728.webp",
-    "alt": "Rooftop Sun Deck & Views",
-    "category": "Terrace",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08735.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08737.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08746-hdr.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08746.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08753-hdr.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08755-hdr.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08764-hdr.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08770-hdr.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08774-hdr.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08783-hdr.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08786-hdr.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08795-hdr.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08799-hdr.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08805-hdr.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08814.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08817.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08820.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08823.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08826.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08832.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08835.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08871.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08874.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08877.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08880.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08889.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08898.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08904.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08908-hdr.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08932-hdr.webp",
-    "alt": "Living Room, Dining & Modern Kitchen",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08943.webp",
-    "alt": "Bedroom 2 Suite with AC",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08946.webp",
-    "alt": "Bedroom 2 Suite with AC",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08949.webp",
-    "alt": "Bedroom 2 Suite with AC",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08952.webp",
-    "alt": "Bedroom 2 Suite with AC",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08955.webp",
-    "alt": "Bedroom 2 Suite with AC",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08958.webp",
-    "alt": "Bedroom 2 Suite with AC",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08961.webp",
-    "alt": "Bedroom 2 Suite with AC",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08964.webp",
-    "alt": "Bedroom 2 Suite with AC",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08967.webp",
-    "alt": "Bedroom 2 Suite with AC",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08979.webp",
-    "alt": "Bedroom 2 Suite with AC",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08982.webp",
-    "alt": "Bedroom 2 Suite with AC",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08985.webp",
-    "alt": "Bedroom 2 Suite with AC",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc08994.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09003.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09006.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09012.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09015.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09018.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09021.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09027.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09030.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09033.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09043.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09046.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09049.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09055.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09058.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09061.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09064.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09067.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09070.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09073.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09076.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09079.webp",
-    "alt": "Master Bedroom 1 & Wardrobe",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09094.webp",
-    "alt": "Modern Ensuite Bathroom & Amenities",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09097.webp",
-    "alt": "Modern Ensuite Bathroom & Amenities",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09103.webp",
-    "alt": "Modern Ensuite Bathroom & Amenities",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09119.webp",
-    "alt": "Modern Ensuite Bathroom & Amenities",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09125.webp",
-    "alt": "Modern Ensuite Bathroom & Amenities",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09143.webp",
-    "alt": "Modern Ensuite Bathroom & Amenities",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09148.webp",
-    "alt": "Modern Ensuite Bathroom & Amenities",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09151.webp",
-    "alt": "Modern Ensuite Bathroom & Amenities",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09154.webp",
-    "alt": "Modern Ensuite Bathroom & Amenities",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09160.webp",
-    "alt": "Modern Ensuite Bathroom & Amenities",
-    "category": "Interior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09190-hdr.webp",
-    "alt": "Villa Twilight & Night Lighting",
-    "category": "Exterior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09193-hdr.webp",
-    "alt": "Villa Twilight & Night Lighting",
-    "category": "Exterior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09194.webp",
-    "alt": "Villa Twilight & Night Lighting",
-    "category": "Exterior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09211-hdr.webp",
-    "alt": "Villa Twilight & Night Lighting",
-    "category": "Exterior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09217-hdr.webp",
-    "alt": "Villa Twilight & Night Lighting",
-    "category": "Exterior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09223-hdr.webp",
-    "alt": "Villa Twilight & Night Lighting",
-    "category": "Exterior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09232-hdr.webp",
-    "alt": "Villa Twilight & Night Lighting",
-    "category": "Exterior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09237.webp",
-    "alt": "Villa Twilight & Night Lighting",
-    "category": "Exterior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09246.webp",
-    "alt": "Villa Twilight & Night Lighting",
-    "category": "Exterior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09255.webp",
-    "alt": "Villa Twilight & Night Lighting",
-    "category": "Exterior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09259-hdr.webp",
-    "alt": "Villa Twilight & Night Lighting",
-    "category": "Exterior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09276.webp",
-    "alt": "Villa Twilight & Night Lighting",
-    "category": "Exterior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09282.webp",
-    "alt": "Villa Twilight & Night Lighting",
-    "category": "Exterior",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09298-hdr.webp",
-    "alt": "Rooftop Lounge Night & Fairy Lights",
-    "category": "Terrace",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09300.webp",
-    "alt": "Rooftop Lounge Night & Fairy Lights",
-    "category": "Terrace",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09303.webp",
-    "alt": "Rooftop Lounge Night & Fairy Lights",
-    "category": "Terrace",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09315.webp",
-    "alt": "Rooftop Lounge Night & Fairy Lights",
-    "category": "Terrace",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09324.webp",
-    "alt": "Rooftop Lounge Night & Fairy Lights",
-    "category": "Terrace",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09333.webp",
-    "alt": "Rooftop Lounge Night & Fairy Lights",
-    "category": "Terrace",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09339.webp",
-    "alt": "Rooftop Lounge Night & Fairy Lights",
-    "category": "Terrace",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09390.webp",
-    "alt": "Rooftop Lounge Night & Fairy Lights",
-    "category": "Terrace",
-    "wide": true
-  },
-  {
-    "url": "/images/villa/dsc09393.webp",
-    "alt": "Rooftop Lounge Night & Fairy Lights",
-    "category": "Terrace",
-    "wide": true
-  }
 ];
