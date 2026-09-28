@@ -335,11 +335,11 @@ export default function Contact() {
             <div className="grid grid-cols-1 gap-4 sm:gap-5">
               {[
                 {
-                  icon: WhatsAppIcon,
-                  label: 'WhatsApp / Phone',
+                  icon: Phone,
+                  label: 'Direct Phone / Call',
                   value: '+94 77 438 4915',
                   sub: 'Available daily for direct bookings & inquiries',
-                  link: 'https://wa.me/94774384915',
+                  link: 'tel:+94774384915',
                 },
                 {
                   icon: MapPin,
@@ -375,11 +375,11 @@ export default function Contact() {
               ].map((info) => {
                 const IconComponent = info.icon;
                 const Wrapper = info.link ? 'a' : 'div';
+                const isExternal = info.link?.startsWith('http');
                 const extraProps = info.link
                   ? {
                     href: info.link,
-                    target: '_blank',
-                    rel: 'noopener noreferrer',
+                    ...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}),
                     className:
                       'flex items-start gap-3 sm:gap-4 p-3.5 sm:p-5 hover:border-[#c9a96e] hover:bg-amber-50/30 transition-all duration-300 group cursor-pointer block',
                   }
@@ -399,7 +399,7 @@ export default function Contact() {
                       <p className="section-label mb-1" style={{ fontSize: '0.65rem' }}>{info.label}</p>
                       <p className="font-medium text-xs sm:text-sm md:text-base break-words" style={{ fontFamily: 'Inter, sans-serif', color: '#0d1b2a' }}>{info.value}</p>
                       {info.sub && (
-                        <p className={`text-[11px] sm:text-xs mt-0.5 leading-snug ${info.link ? 'text-amber-700 font-medium' : 'text-gray-400'}`} style={{ fontFamily: 'Inter, sans-serif' }}>
+                        <p className={`text-[11px] sm:text-xs mt-0.5 leading-snug ${info.link ? 'text-emerald-700 font-medium' : 'text-gray-400'}`} style={{ fontFamily: 'Inter, sans-serif' }}>
                           {info.sub}
                         </p>
                       )}
